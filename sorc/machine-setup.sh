@@ -142,6 +142,7 @@ elif [[ -d /data/prod ]] ; then
 else
     echo WARNING: UNKNOWN PLATFORM 1>&2
 fi
+target="singularity"
 
 unset __ms_shell
 unset __ms_ksh_test

@@ -12,6 +12,8 @@ target=${target:-"NULL"}
 compiler=${compiler:-"intel"}
 export MOD_PATH
 
+target="singularity"
+
 if [[ "$target" == "linux.*" || "$target" == "macosx.*" ]]; then
  unset -f module
  set +x
@@ -30,7 +32,7 @@ fi
 # access the EMC ftp site, so turn off the build (-DBUILD_TESTING=OFF) of the units tests accordingly.
 # Those with access to the EMC ftp site are: Orion, Hera, WCOSS-Cray, WCOSS-Dell.
 
-if [[ "$target" == "hera" || "$target" == "orion" || "$target" == "wcoss_cray" || "$target" == "wcoss_dell_p3" ]]; then
+if [[ "$target" == "hera" || "$target" == "orion" || "$target" == "singularity" || "$target" == "wcoss_dell_p3" ]]; then
   CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=../ -DEMC_EXEC_DIR=ON -DBUILD_TESTING=OFF"
    #CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=../ -DEMC_EXEC_DIR=ON -DBUILD_TESTING=ON"
    #CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=../ -DEMC_EXEC_DIR=ON -DENABLE_DOCS=ON -DBUILD_TESTING=ON"
