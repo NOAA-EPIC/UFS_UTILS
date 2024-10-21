@@ -39,7 +39,7 @@ elif [[ -d /scratch1 ]] ; then
     target=hera
     module purge
 elif [[ "$(hostname)" == "gaea5"* && -d /gpfs/f5 ]] ; then
-    # We are on GAEA.
+    # We are on GAEAC5.
     if ( ! eval module help > /dev/null 2>&1 ) ; then
       # We cannot simply load the module command.  The GAEA
       # /etc/profile modifies a number of module-related variables
@@ -49,9 +49,9 @@ elif [[ "$(hostname)" == "gaea5"* && -d /gpfs/f5 ]] ; then
       source /etc/profile
     fi
     module reset
-    target=gaea
+    target=gaeac5
 elif [[ "$(hostname)" == "gaea6"* && -d /gpfs/f6 ]] ; then
-    target=gaeaC6
+    target=gaeac6
     source /opt/cray/pe/lmod/8.7.31/init/$__ms_shell
 elif [[ "$(hostname)" =~ "Orion" || "$(hostname)" =~ "orion" ]]; then
     target="orion"
