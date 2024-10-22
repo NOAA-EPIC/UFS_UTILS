@@ -30,6 +30,14 @@ if [[ -d /lfs5 ]] ; then
 elif [[ -d /lfs/h1 ]] ; then
     target=wcoss2
     module reset
+elif [[ -d /opt/spack-stack ]] ; then
+    # We are using a container 
+    if ( ! eval module help > /dev/null 2>&1 ) ; then
+        echo load the module command 1>&2
+        source /apps/lmod/lmod/init/$__ms_shell
+    fi
+    target=container
+    module purge
 elif [[ -d /scratch1 ]] ; then
     # We are on NOAA Hera
     if ( ! eval module help > /dev/null 2>&1 ) ; then
