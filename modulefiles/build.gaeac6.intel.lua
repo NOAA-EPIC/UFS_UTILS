@@ -5,12 +5,12 @@ Load environment to compile UFS_UTILS on Gaea using Intel
 prepend_path("MODULEPATH", "/sw/rdtn/modulefiles")
 load("hsi")
 
-prepend_path("MODULEPATH", "/ncrc/proj/epic/spack-stack/spack-stack-1.6.0/envs/unified-env/install/modulefiles/Core")
+prepend_path("MODULEPATH", "/ncrc/proj/epic/spack-stack/c6/spack-stack-1.6.0/envs/unified-env/install/modulefiles/Core")
 
 stack_intel_ver=os.getenv("stack_intel_ver") or "2023.2.0"
 load(pathJoin("stack-intel", stack_intel_ver))
 
-stack_cray_mpich_ver=os.getenv("stack_cray_mpich_ver") or "8.1.28"
+stack_cray_mpich_ver=os.getenv("stack_cray_mpich_ver") or "8.1.29"
 load(pathJoin("stack-cray-mpich", stack_cray_mpich_ver))
 
 cmake_ver=os.getenv("cmake_ver") or "3.23.1"
