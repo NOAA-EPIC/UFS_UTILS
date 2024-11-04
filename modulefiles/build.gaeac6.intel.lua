@@ -1,5 +1,5 @@
 help([[
-Load environment to compile UFS_UTILS on Gaea using Intel
+Load environment to compile UFS_UTILS on Gaea C6 using Intel
 ]])
 
 prepend_path("MODULEPATH", "/sw/rdtn/modulefiles")
