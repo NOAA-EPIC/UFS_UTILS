@@ -31,6 +31,9 @@ load(pathJoin("sp", sp_ver))
 w3emc_ver=os.getenv("w3emc_ver") or "2.10.0"
 load(pathJoin("w3emc", w3emc_ver))
 
+sigio_ver=os.getenv("sigio_ver") or "2.3.2"
+load(pathJoin("sigio", sigio_ver))
+
 png_ver=os.getenv("png_ver") or "1.6.37"
 load(pathJoin("libpng", png_ver))
 
@@ -40,7 +43,13 @@ load(pathJoin("netcdf-c", netcdf_c_ver))
 netcdf_fortran_ver=os.getenv("netcdf_fortran_ver") or "4.6.1"
 load(pathJoin("netcdf-fortran", netcdf_fortran_ver))
 
+nccmp_ver=os.getenv("nccmp_ver") or "1.9.0.1"
+load(pathJoin("nccmp", nccmp_ver))
+
 esmf_ver=os.getenv("esmf_ver") or "8.6.1"
 load(pathJoin("esmf", esmf_ver))
+
+nco_ver=os.getenv("nco_ver") or "5.1.6"
+load(pathJoin("nco", nco_ver))
 
 whatis("Description: UFS_UTILS build environment")
