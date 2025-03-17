@@ -1,16 +1,18 @@
 help([[
-Load environment to compile UFS_UTILS on Hera using Gnu
+Load environment to compile UFS_UTILS on Hera using Gnu 13.3
 ]])
 
 hpss_ver=os.getenv("hpss_ver") or ""
 load(pathJoin("hpss", hpss_ver))
 
-prepend_path("MODULEPATH", "/scratch1/NCEPDEV/nems/role.epic/spack-stack/spack-stack-1.6.0/envs/unified-env-rocky8/install/modulefiles/Core")
+prepend_path("MODULEPATH", "/scratch2/NCEPDEV/stmp1/role.epic/installs/gnu/modulefiles")
+prepend_path("MODULEPATH", "/scratch2/NCEPDEV/stmp1/role.epic/installs/openmpi/modulefiles")
+prepend_path("MODULEPATH", "/scratch2/NCEPDEV/stmp1/role.epic/spack-stack/spack-stack-1.6.0_gnu13/envs/fms-2024.01/install/modulefiles/Core")
 
-stack_gcc_ver=os.getenv("stack_gcc_ver") or "9.2"
-load(pathJoin("stack-gcc", gnu_ver))
+stack_gnu_ver=os.getenv("stack_gnu_ver") or "13.3.0"
+load(pathJoin("stack-gcc", stack_gnu_ver))
 
-stack_openmpi_ver=os.getenv("stack_openmpi_ver") or "4.1.5"
+stack_openmpi_ver=os.getenv("stack_openmpi_ver") or "4.1.6"
 load(pathJoin("stack-openmpi", stack_openmpi_ver))
 
 cmake_ver=os.getenv("cmake_ver") or "3.23.1"
@@ -19,7 +21,7 @@ load(pathJoin("cmake", cmake_ver))
 bacio_ver=os.getenv("bacio_ver") or "2.4.1"
 load(pathJoin("bacio", bacio_ver))
 
-g2_ver=os.getenv("g2_ver") or "3.4.5"
+g2_ver=os.getenv("g2_ver") or "3.5.1"
 load(pathJoin("g2", g2_ver))
 
 ip_ver=os.getenv("ip_ver") or "4.3.0"
@@ -41,15 +43,6 @@ load(pathJoin("w3emc", w3emc_ver))
 sigio_ver=os.getenv("sigio_ver") or "2.3.2"
 load(pathJoin("sigio", sigio_ver))
 
-hdf5_ver=os.getenv("hdf5_ver") or "1.14.0"
-load(pathJoin("hdf5", hdf5_ver))
-
-netcdf_c_ver=os.getenv("netcdf_c_ver") or "4.9.2"
-load(pathJoin("netcdf-c", netcdf_c_ver))
-
-netcdf_fortran_ver=os.getenv("netcdf_fortran_ver") or "4.6.1"
-load(pathJoin("netcdf-fortran", netcdf_fortran_ver))
-
 nccmp_ver=os.getenv("nccmp_ver") or "1.9.0.1"
 load(pathJoin("nccmp", nccmp_ver))
 
@@ -58,5 +51,14 @@ load(pathJoin("esmf", esmf_ver))
 
 nco_ver=os.getenv("nco_ver") or "5.0.6"
 load(pathJoin("nco", nco_ver))
+
+
+prepend_path("CPPFLAGS", " -I/apps/slurm_hera/23.11.3/include/slurm"," ")
+prepend_path("LD_LIBRARY_PATH", "/apps/slurm_hera/23.11.3/lib")
+setenv("LD_PRELOAD", "/scratch2/NCEPDEV/stmp1/role.epic/installs/gnu/13.3.0/lib64/libstdc++.so.6")
+
+setenv("CC", "mpicc")
+setenv("CXX", "mpic++")
+setenv("FC", "mpif90")
 
 whatis("Description: UFS_UTILS build environment")

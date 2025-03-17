@@ -19,7 +19,7 @@ fi
 target=""
 USERNAME=`echo $LOGNAME | awk '{ print tolower($0)'}`
 
-if [[ -d /lfs4 ]] ; then
+if [[ -d /lfs5 ]] ; then
     # We are on NOAA Jet
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2
@@ -30,6 +30,14 @@ if [[ -d /lfs4 ]] ; then
 elif [[ -d /lfs/h1 ]] ; then
     target=wcoss2
     module reset
+elif [[ -d /opt/spack-stack ]] ; then
+    # We are using a container 
+    if ( ! eval module help > /dev/null 2>&1 ) ; then
+        echo load the module command 1>&2
+        source /apps/lmod/lmod/init/$__ms_shell
+    fi
+    target=container
+    module purge
 elif [[ -d /scratch1 ]] ; then
     # We are on NOAA Hera
     if ( ! eval module help > /dev/null 2>&1 ) ; then
@@ -38,8 +46,8 @@ elif [[ -d /scratch1 ]] ; then
     fi
     target=hera
     module purge
-elif [[ -d /gpfs && -d /ncrc ]] ; then
-    # We are on GAEA.
+elif [[ "$(hostname)" == "gaea5"* || "$(hostname)" =~ c5n[0-9]+ ]] && [[ -d /gpfs/f5 ]] ; then
+    # We are on GAEAC5.
     if ( ! eval module help > /dev/null 2>&1 ) ; then
       # We cannot simply load the module command.  The GAEA
       # /etc/profile modifies a number of module-related variables
@@ -49,8 +57,11 @@ elif [[ -d /gpfs && -d /ncrc ]] ; then
       source /etc/profile
     fi
     module reset
-    target=gaea
-elif [[ "$(hostname)" =~ "Orion" ]]; then
+    target=gaeac5
+elif [[ "$(hostname)" == "gaea6"* || "$(hostname)" =~ c6n[0-9]+ ]] && [[ -d /gpfs/f6 ]] ; then
+    target=gaeac6
+    source /opt/cray/pe/lmod/8.7.31/init/$__ms_shell
+elif [[ "$(hostname)" =~ "Orion" || "$(hostname)" =~ "orion" ]]; then
     target="orion"
     module purge
 elif [[ "$(hostname)" =~ "hercules" || "$(hostname)" =~ "Hercules" ]]; then
@@ -67,16 +78,19 @@ elif [[ -d /data/prod ]] ; then
     fi
     target=s4
     module purge
-elif [[ "$(dnsdomainname)" =~ "pw" ]]; then
-    if [[ "${PW_CSP}" == "aws" ]]; then # TODO: Add other CSPs here.
-	target=noaacloud
-        module purge
-    else
-        echo WARNING: UNSUPPORTED CSP PLATFORM 1>&2; exit 99
-    fi
 else
-
-    echo WARNING: UNKNOWN PLATFORM 1>&2
+    if [[ ! -v PW_CSP ]]; then
+        echo WARNING: UNKNOWN PLATFORM 1>&2; exit 99
+    elif [[ -z "${PW_CSP}" ]]; then
+        echo WARNING: UNKNOWN PLATFORM 1>&2; exit 99
+    else
+        if [[ "${PW_CSP}" == "aws" || "${PW_CSP}" == "azure" || "${PW_CSP}" == "google" ]]; then
+            target=noaacloud
+            module purge
+        else
+            echo WARNING: UNKNOWN PLATFORM 1>&2; exit 99
+        fi
+    fi
 fi
 
 unset __ms_shell

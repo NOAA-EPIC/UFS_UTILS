@@ -28,14 +28,14 @@
 
 set -x
 
-compiler=${compiler:-"intel"}
-
 source ../../sorc/machine-setup.sh > /dev/null 2>&1
 module use ../../modulefiles
-module load build.$target.$compiler
+module load build.$target.intelllvm
+set +x
 module list
+set -x
 
-export DATA="${WORK_DIR:-/lfs4/HFIP/emcda/$LOGNAME/stmp}"
+export DATA="${WORK_DIR:-/lfs5/HFIP/emcda/$LOGNAME/stmp}"
 export DATA="${DATA}/reg-tests/weight_gen"
 
 #-----------------------------------------------------------------------------
@@ -49,7 +49,7 @@ if [ "$UPDATE_BASELINE" = "TRUE" ]; then
   source ../get_hash.sh
 fi
 
-export HOMEreg=/lfs4/HFIP/hfv3gfs/emc.nemspara/role.ufsutils/ufs_utils/reg_tests/weight_gen
+export HOMEreg=/lfs5/HFIP/hfv3gfs/emc.nemspara/role.ufsutils/ufs_utils/reg_tests/weight_gen
 export HOMEufs=$PWD/../..
 
 ./weight_gen.sh

@@ -61,12 +61,12 @@
 #
 #-----------------------------------------------------------------------
 
-set -x
-
 source ../sorc/machine-setup.sh > /dev/null 2>&1
 module use ../modulefiles
-module load build.$target.intel
+module load build.$target.intelllvm
+set +x
 module list
+set -x
 
 #-----------------------------------------------------------------------
 # Set grid specs here.
@@ -155,8 +155,8 @@ fi
 #-----------------------------------------------------------------------
 
 export home_dir=$SLURM_SUBMIT_DIR/..
-export TEMP_DIR=/lfs4/HFIP/emcda/$LOGNAME/stmp/fv3_grid.$gtype
-export out_dir=/lfs4/HFIP/emcda/$LOGNAME/stmp/my_grids
+export TEMP_DIR=/lfs5/HFIP/emcda/$LOGNAME/stmp/fv3_grid.$gtype
+export out_dir=/lfs5/HFIP/emcda/$LOGNAME/stmp/my_grids
 #-----------------------------------------------------------------------
 # Should not need to change anything below here.
 #-----------------------------------------------------------------------

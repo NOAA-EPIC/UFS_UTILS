@@ -28,7 +28,7 @@ program gen_fixgrid
   use cicegrid,          only: write_cicegrid
   use scripgrid,         only: write_scripgrid
   use topoedits,         only: add_topoedits, apply_topoedits
-  use charstrings,       only: logmsg, res, dirsrc, dirout, atmres, fv3dir, editsfile
+  use charstrings,       only: logmsg, res, atmres, dirsrc, dirout, fv3dir, editsfile
   use charstrings,       only: maskfile, maskname, topofile, toponame, editsfile, staggerlocs, cdate, history
   use debugprint,        only: checkseam, checkxlatlon, checkpoint
   use netcdf
@@ -48,7 +48,7 @@ program gen_fixgrid
   character(len= 2) :: cstagger
 
   integer :: rc,ncid,id,xtype
-  integer :: i,j,k,i2,j2
+  integer :: i,j,k,n,i2,j2
   integer :: ii
   integer :: localPet, nPet
   logical :: fexist = .false.
@@ -89,8 +89,6 @@ program gen_fixgrid
   print '(a)',' output grid tag '//trim(res)
   print '(a)',' supergrid source directory '//trim(dirsrc)
   print '(a)',' output grid directory '//trim(dirout)
-  print '(a)',' atm resolution '//trim(atmres)
-  print '(a,i6)',' fv3 tile grid size ',npx
   print '(a)',' atm mosaic directory '//trim(fv3dir)
   print '(a)',' MOM6 topography file '//trim(topofile)
   print '(a)',' MOM6 edits file '//trim(editsfile)
@@ -419,8 +417,8 @@ program gen_fixgrid
   fdst = trim(dirout)//'/'//'grid_cice_NEMS_mx'//trim(res)//'.nc'
   call write_cicegrid(trim(fdst))
   deallocate(ulon, ulat, htn, hte)
-  ! write scrip grids; only the Ct is required, the remaining
-  ! staggers are used only in the postweights generation
+
+  ! write SCRIP files for generation of positional weights
   do k = 1,nv
      cstagger = trim(staggerlocs(k))
      fdst = trim(dirout)//'/'//trim(cstagger)//'.mx'//trim(res)//'_SCRIP.nc'
@@ -486,74 +484,81 @@ program gen_fixgrid
   ! tiled files containing the mapped ocean mask
   !---------------------------------------------------------------------
 
-  method=ESMF_REGRIDMETHOD_CONSERVE
-  fsrc = trim(dirout)//'/'//'Ct.mx'//trim(res)//'_SCRIP_land.nc'
-  fdst = trim(fv3dir)//'/'//trim(atmres)//'/'//trim(atmres)//'_mosaic.nc'
-  fwgt = trim(dirout)//'/'//'Ct.mx'//trim(res)//'.to.'//trim(atmres)//'.nc'
-  logmsg = 'creating weight file '//trim(fwgt)
-  print '(a)',trim(logmsg)
+  do n = 1,size(catm)
+     npx = catm(n)
+     if (npx < 100) then
+        write(atmres,'(a,i2)')'C',npx
+     elseif (npx < 1000) then
+        write(atmres,'(a,i3)')'C',npx
+     else
+        write(atmres,'(a,i4)')'C',npx
+     end if
 
-  call ESMF_RegridWeightGen(srcFile=trim(fsrc),dstFile=trim(fdst),         &
-       weightFile=trim(fwgt), regridmethod=method,                         &
-       unmappedaction=ESMF_UNMAPPEDACTION_IGNORE, ignoreDegenerate=.true., &
-       netcdf4fileFlag=.true., tileFilePath=trim(fv3dir)//'/'//trim(atmres)//'/', rc=rc)
-  if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
-       line=__LINE__, file=__FILE__)) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+     method=ESMF_REGRIDMETHOD_CONSERVE
+     fsrc = trim(dirout)//'/'//'Ct.mx'//trim(res)//'_SCRIP_land.nc'
+     fdst = trim(fv3dir)//'/'//trim(atmres)//'/'//trim(atmres)//'_mosaic.nc'
+     fwgt = trim(dirout)//'/'//'Ct.mx'//trim(res)//'.to.'//trim(atmres)//'.nc'
+     logmsg = 'creating weight file '//trim(fwgt)
+     print '(a)',trim(logmsg)
 
-  logmsg = 'creating mapped ocean mask for '//trim(atmres)
-  print '(a)',trim(logmsg)
-  call make_frac_land(trim(fsrc), trim(fwgt))
+     call ESMF_RegridWeightGen(srcFile=trim(fsrc),dstFile=trim(fdst),         &
+          weightFile=trim(fwgt), regridmethod=method,                         &
+          unmappedaction=ESMF_UNMAPPEDACTION_IGNORE, ignoreDegenerate=.true., &
+          netcdf4fileFlag=.true., tileFilePath=trim(fv3dir)//'/'//trim(atmres)//'/', rc=rc)
+     if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+          line=__LINE__, file=__FILE__)) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+
+     logmsg = 'creating mapped ocean mask for '//trim(atmres)
+     print '(a)',trim(logmsg)
+     call make_frac_land(trim(fsrc), trim(fwgt))
+  end do
 
   !---------------------------------------------------------------------
-  ! use ESMF to find the tripole:tripole weights for creation
-  ! of CICE ICs; the source grid is always mx025; don't create this
-  ! file if destination is also mx025
+  ! use ESMF to create positional weights for mapping a field from its
+  ! native stagger location (Cu,Cv,Bu) onto the center (Ct) grid location
+  !---------------------------------------------------------------------
+
+  method=ESMF_REGRIDMETHOD_BILINEAR
+  fdst = trim(dirout)//'/'//'Ct.mx'//trim(res)//'_SCRIP.nc'
+  do k = 2,nv
+     cstagger = trim(staggerlocs(k))
+     fsrc = trim(dirout)//'/'//trim(cstagger)//'.mx'//trim(res)//'_SCRIP.nc'
+     fwgt = trim(dirout)//'/'//'tripole.mx'//trim(res)//'.'//trim(cstagger)//'.to.Ct.bilinear.nc'
+     logmsg = 'creating weight file '//trim(fwgt)
+     print '(a)',trim(logmsg)
+
+     call ESMF_RegridWeightGen(srcFile=trim(fsrc),dstFile=trim(fdst), &
+          weightFile=trim(fwgt), regridmethod=method,                 &
+          ignoreDegenerate=.true.,                                    &
+          unmappedaction=ESMF_UNMAPPEDACTION_IGNORE, rc=rc)
+     if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
+          line=__LINE__, file=__FILE__)) call ESMF_Finalize(endflag=ESMF_END_ABORT)
+  end do
+
+  !---------------------------------------------------------------------
+  ! use ESMF to create positional weights for mapping a field from the
+  ! center (Ct) grid location back to the native stagger location
+  ! (Cu,Cv,Bu). The destination is never mx025.
   !---------------------------------------------------------------------
 
   if(trim(res) .ne. '025') then
-     fsrc = trim(dirout)//'/'//'Ct.mx025_SCRIP.nc'
-     inquire(FILE=trim(fsrc), EXIST=fexist)
-     if (fexist ) then
-        method=ESMF_REGRIDMETHOD_NEAREST_STOD
-        fdst = trim(dirout)//'/'//'Ct.mx'//trim(res)//'_SCRIP.nc'
-        fwgt = trim(dirout)//'/'//'tripole.mx025.Ct.to.mx'//trim(res)//'.Ct.neareststod.nc'
+     method=ESMF_REGRIDMETHOD_BILINEAR
+     fsrc = trim(dirout)//'/'//'Ct.mx'//trim(res)//'_SCRIP.nc'
+     do k = 2,nv
+        cstagger = trim(staggerlocs(k))
+        fdst = trim(dirout)//'/'//trim(cstagger)//'.mx'//trim(res)//'_SCRIP.nc'
+        fwgt = trim(dirout)//'/'//'tripole.mx'//trim(res)//'.Ct.to.'//trim(cstagger)//'.bilinear.nc'
         logmsg = 'creating weight file '//trim(fwgt)
         print '(a)',trim(logmsg)
-        call ESMF_RegridWeightGen(srcFile=trim(fsrc),dstFile=trim(fdst), &
-             weightFile=trim(fwgt), regridmethod=method,                 &
-             ignoreDegenerate=.true., unmappedaction=ESMF_UNMAPPEDACTION_IGNORE, rc=rc)
-        if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
-             line=__LINE__, file=__FILE__)) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
-        method=ESMF_REGRIDMETHOD_BILINEAR
-        fdst = trim(dirout)//'/'//'Ct.mx'//trim(res)//'_SCRIP.nc'
-        fwgt = trim(dirout)//'/'//'tripole.mx025.Ct.to.mx'//trim(res)//'.Ct.bilinear.nc'
-        logmsg = 'creating weight file '//trim(fwgt)
-        print '(a)',trim(logmsg)
         call ESMF_RegridWeightGen(srcFile=trim(fsrc),dstFile=trim(fdst), &
              weightFile=trim(fwgt), regridmethod=method,                 &
-             ignoreDegenerate=.true., unmappedaction=ESMF_UNMAPPEDACTION_IGNORE, rc=rc)
+             ignoreDegenerate=.true.,                                    &
+             unmappedaction=ESMF_UNMAPPEDACTION_IGNORE, rc=rc)
         if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
              line=__LINE__, file=__FILE__)) call ESMF_Finalize(endflag=ESMF_END_ABORT)
-     else
-        logmsg = 'ERROR: '//trim(fsrc)//' is required to generate tripole:triple weights'
-        print '(a)',trim(logmsg)
-        stop
-     end if
+     end do
   end if
-
-  ! tripole Ct->tripole Bu for CICE are only for CICE IC creation
-  fsrc = trim(dirout)//'/'//'Ct.mx'//trim(res)//'_SCRIP.nc'
-  fdst = trim(dirout)//'/'//'Bu.mx'//trim(res)//'_SCRIP.nc'
-  fwgt = trim(dirout)//'/'//'tripole.mx'//trim(res)//'.Ct.to.Bu.bilinear.nc'
-  logmsg = 'creating weight file '//trim(fwgt)
-  print '(a)',trim(logmsg)
-
-  call ESMF_RegridWeightGen(srcFile=trim(fsrc),dstFile=trim(fdst), &
-       weightFile=trim(fwgt), regridmethod=method,                 &
-       ignoreDegenerate=.true., unmappedaction=ESMF_UNMAPPEDACTION_IGNORE, rc=rc)
-  if (ESMF_LogFoundError(rcToCheck=rc, msg=ESMF_LOGERR_PASSTHRU, &
-       line=__LINE__, file=__FILE__)) call ESMF_Finalize(endflag=ESMF_END_ABORT)
 
   !---------------------------------------------------------------------
   !

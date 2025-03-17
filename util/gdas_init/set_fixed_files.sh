@@ -10,13 +10,19 @@ if [ ${CTAR} == 'C48' ] ; then
 elif [ ${CTAR} == 'C96' ]; then
   OCNRES='500'
 elif [ ${CTAR} == 'C192' ]; then
-  OCNRES='050'
+  OCNRES='025'
 elif [ ${CTAR} == 'C384' ]; then
   OCNRES='025'
 elif [ ${CTAR} == 'C768' ]; then
   OCNRES='025'
 elif [ ${CTAR} == 'C1152' ]; then
   OCNRES='025'
+elif [ ${CTAR} == 'C12' ]; then
+  OCNRES='900'
+elif [ ${CTAR} == 'C18' ]; then
+  OCNRES='900'
+elif [ ${CTAR} == 'C24' ]; then
+  OCNRES='900'
 else
   OCNRES='025'
 fi
@@ -37,9 +43,11 @@ if [ "$machine" = 'hera' ] ; then
 elif [ "$machine" = 'wcoss2' ] ; then
   FIX_ORO_INPUT=/lfs/h2/emc/global/noscrub/emc.global/FIX/fix/orog/20230615
 elif [ "$machine" = 'jet' ] ; then
-  FIX_ORO_INPUT=/lfs4/HFIP/hfv3gfs/glopara/git/fv3gfs/fix/orog/20230615
+  FIX_ORO_INPUT=/lfs5/HFIP/hfv3gfs/glopara/FIX/fix/orog/20230615
 elif [ "$machine" = 's4' ] ; then
   FIX_ORO_INPUT=/data/prod/glopara/fix/orog/20230615
+elif [ "$machine" = 'gaeac6' ] ; then
+  FIX_ORO_INPUT=/gpfs/f6/drsa-precip3/world-shared/role.glopara/fix/orog/20230615
 else
   set +x
   echo ERROR machine $machine not supported.

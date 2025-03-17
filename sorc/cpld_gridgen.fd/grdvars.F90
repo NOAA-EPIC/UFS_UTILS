@@ -163,6 +163,10 @@ module grdvars
                                                                    !! rounded to minimum_depth
   real(kind=real_kind), parameter :: maximum_lat = 88.0            !< The maximum latitude for water points for WW3
 
+  ! ATM resolutions
+  integer, parameter :: maxatmres = 10                             !< The maximum number of possible ATM resolutions
+  integer, allocatable, dimension(:) :: catm                       !< The ATM resolutions for mapped ocean masks
+
 contains
   !> Allocate grid variables
   !!

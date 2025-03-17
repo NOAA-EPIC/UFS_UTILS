@@ -1,17 +1,17 @@
 help([[
-Load environment to compile UFS_UTILS on Gaea using Intel
+Load environment to compile UFS_UTILS on Jet using Intel LLVM
 ]])
 
-prepend_path("MODULEPATH", "/sw/rdtn/modulefiles")
-load("hsi")
+hpss_ver=os.getenv("hpss_ver") or ""
+load(pathJoin("hpss", hpss_ver))
 
-prepend_path("MODULEPATH", "/ncrc/proj/epic/spack-stack/spack-stack-1.6.0/envs/unified-env/install/modulefiles/Core")
+prepend_path("MODULEPATH", "/contrib/spack-stack/spack-stack-1.6.0/envs/fms-2024.01/install/modulefiles/Core")
 
-stack_intel_ver=os.getenv("stack_intel_ver") or "2023.1.0"
+stack_intel_ver=os.getenv("stack_intel_ver") or "2021.5.0"
 load(pathJoin("stack-intel", stack_intel_ver))
 
-stack_cray_mpich_ver=os.getenv("stack_cray_mpich_ver") or "8.1.25"
-load(pathJoin("stack-cray-mpich", stack_cray_mpich_ver))
+stack_impi_ver=os.getenv("stack_impi_ver") or "2021.5.1"
+load(pathJoin("stack-intel-oneapi-mpi", stack_impi_ver))
 
 cmake_ver=os.getenv("cmake_ver") or "3.23.1"
 load(pathJoin("cmake", cmake_ver))
@@ -19,7 +19,7 @@ load(pathJoin("cmake", cmake_ver))
 bacio_ver=os.getenv("bacio_ver") or "2.4.1"
 load(pathJoin("bacio", bacio_ver))
 
-g2_ver=os.getenv("g2_ver") or "3.4.5"
+g2_ver=os.getenv("g2_ver") or "3.5.1"
 load(pathJoin("g2", g2_ver))
 
 ip_ver=os.getenv("ip_ver") or "4.3.0"
@@ -34,7 +34,7 @@ load(pathJoin("sp", sp_ver))
 w3emc_ver=os.getenv("w3emc_ver") or "2.10.0"
 load(pathJoin("w3emc", w3emc_ver))
 
--- Uncomment when CHGRES_ALL is ON
+-- Uncomment when CHGRES_ALL is ON.
 --sfcio_ver=os.getenv("sfcio_ver") or "1.4.1"
 --load(pathJoin("sfcio", sfcio_ver))
 
@@ -62,5 +62,10 @@ load(pathJoin("esmf", esmf_ver))
 nco_ver=os.getenv("nco_ver") or "5.0.6"
 load(pathJoin("nco", nco_ver))
 
-whatis("Description: UFS_UTILS build environment")
+setenv("I_MPI_CC", "icx")
+setenv("I_MPI_F90", "ifx")
 
+setenv("CC", "mpiicc")
+setenv("FC", "mpiifort")
+
+whatis("Description: UFS_UTILS build environment")

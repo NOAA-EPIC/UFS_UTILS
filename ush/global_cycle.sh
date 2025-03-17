@@ -30,6 +30,7 @@
 #                   PACKAGEROOT/gfs.v15.0.0.
 #     PACKAGEROOT   Location of gfs package.
 #     FIXgfs        Directory for fixed data. Default is $HOMEgfs/fix.
+#     FIXorog       Directory for fixed orography data. Default is $FIXgfs/orog
 #     EXECgfs       Directory of the program executable.  Defaults to
 #                   $HOMEgfs/exec
 #     DATA          Working directory
@@ -63,29 +64,29 @@
 #                   FNVETC must be set to igbp file:
 #                   ${FIXgfs}/am/global_vegtype.igbp.t$JCAP_CASE.$LONB_CASE.$LATB_CASE.rg.grb
 #     FNALBC        Input 4-component albedo climatology GRIB file.
-#                   defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.snowfree_albedo.tileX.nc
+#                   defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.snowfree_albedo.tileX.nc
 #     FNALBC2       Input 'facsf' and 'facwf' albedo climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.facsf.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.facsf.tileX.nc
 #     FNAISC        Input sea ice climatology GRIB file.
 #                   Defaults to ${FIXgfs}/am/IMS-NIC.blended.ice.monthly.clim.grb
 #     FNTG3C        Input deep soil temperature climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.substrate_temperature.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.substrate_temperature.tileX.nc
 #     FNVEGC        Input vegetation fraction climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc
 #     FNVETC        Input vegetation type climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_type.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_type.tileX.nc
 #     FNSOTC        Input soil type climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.soil_type.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.soil_type.tileX.nc
 #     FNSMCC        Input soil moisture climatology GRIB file.
 #                   Defaults to ${FIXgfs}/am/global_soilmgldas.statsgo.t$JCAP_CASE.$LONB_CASE.$LATB_CASE.grb
 #     FNVMNC        Input min veg frac climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc
 #     FNVMXC        Input max veg frac climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc
 #     FNSLPC        Input slope type climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.slope_type.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.slope_type.tileX.nc
 #     FNABSC        Input max snow albedo climatology GRIB file.
-#                   Defaults to ${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.maximum_snow_albedo.tileX.nc
+#                   Defaults to ${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.maximum_snow_albedo.tileX.nc
 #     FNMSKH        Input high resolution land mask GRIB file.  Use to set mask for
 #                   some of the input climatology fields.  This is NOT the model mask.
 #                   Defaults to ${FIXgfs}/am/global_slmask.t1534.3072.1536.grb
@@ -139,10 +140,11 @@
 #                   between the filtered and unfiltered terrain.  Default is true.
 #     DONST         Process NST records when using NST model.  Default is 'no'.
 #     DO_SFCCYCLE   Call sfcsub routine 
-#     DO_LNDINC     Call routine to update snow/soil states with increment files
-#     DO_SOI_INC_GSI    Call routine to update soil states with gsi(gaussian) increment files
-#     DO_SNO_INC_JEDI   Call routine to update snow states with jedi increment files
-#     DO_SOI_INC_JEDI   Call routine to update soil states with jedi increment files
+#     GCYCLE_DO_SOILINCR   Call routine to add soil increments
+#     GCYCLE_DO_SNOWINCR   Call routine to add snow inrcements
+#     GCYCLE_INTERP_LANDINCR  Flag to regrid input land increment from Gaus to native model 
+#                   grid inside gcycle
+#                   
 #     zsea1/zsea2   When running with NST model, this is the lower/upper bound
 #                   of depth of sea temperature.  In whole mm.
 #     MAX_TASKS_CY  Normally, program should be run with a number of mpi tasks
@@ -233,6 +235,7 @@ PACKAGEROOT=${PACKAGEROOT:-/lfs/h1/ops/prod/packages}
 HOMEgfs=${HOMEgfs:-${PACKAGEROOT}/gfs_ver.${gfs_ver}}
 EXECgfs=${EXECgfs:-$HOMEgfs/exec}
 FIXgfs=${FIXgfs:-$HOMEgfs/fix}
+FIXorog=${FIXorog:-$FIXgfs/orog}
 DATA=${DATA:-$(pwd)}
 COMIN=${COMIN:-$(pwd)}
 COMOUT=${COMOUT:-$(pwd)}
@@ -253,6 +256,7 @@ LATB_CASE=$((2*CRES))
 DELTSFC=${DELTSFC:-0}
 
 LSOIL=${LSOIL:-4}
+LSOIL_INCR=${LSOIL_INCR:-2}
 FSMCL2=${FSMCL2:-60}
 FSLPL=${FSLPL:-99999.}
 FSOTL=${FSOTL:-99999.}
@@ -264,10 +268,14 @@ CYCLVARS=${CYCLVARS:-""}
 use_ufo=${use_ufo:-.true.}
 DONST=${DONST:-"NO"}
 DO_SFCCYCLE=${DO_SFCCYCLE:-.true.}
-DO_LNDINC=${DO_LNDINC:-.false.}
-DO_SOI_INC_GSI=${DO_SOI_INC_GSI:-.false.}
-DO_SNO_INC_JEDI=${DO_SNO_INC_JEDI:-.false.}
-DO_SOI_INC_JEDI=${DO_SOI_INC_JEDI:-.false.}
+GCYCLE_DO_SOILINCR=${GCYCLE_DO_SOILINCR:-.false.}
+GCYCLE_DO_SNOWINCR=${GCYCLE_DO_SNOWINCR:-.false.}
+if [ "$GCYCLE_DO_SOILINCR" == ".true." ] || [ "$GCYCLE_DO_SNOWINCR" == ".true." ] ; then
+        DO_LANDINCR=".true."
+else
+        DO_LANDINCR=".false."
+fi
+GCYCLE_INTERP_LANDINCR=${GCYCLE_INTERP_LANDINCR:-.false.}
 zsea1=${zsea1:-0}
 zsea2=${zsea2:-0}
 MAX_TASKS_CY=${MAX_TASKS_CY:-99999}
@@ -281,16 +289,16 @@ FNSNOC=${FNSNOC:-${FIXgfs}/am/global_snoclim.1.875.grb}
 FNZORC=${FNZORC:-igbp}
 FNAISC=${FNAISC:-${FIXgfs}/am/IMS-NIC.blended.ice.monthly.clim.grb}
 FNSMCC=${FNSMCC:-${FIXgfs}/am/global_soilmgldas.statsgo.t$JCAP_CASE.$LONB_CASE.$LATB_CASE.grb}
-FNALBC2=${FNALBC2:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.facsf.tileX.nc}
-FNTG3C=${FNTG3C:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.substrate_temperature.tileX.nc}
-FNVEGC=${FNVEGC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc}
-FNALBC=${FNALBC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.snowfree_albedo.tileX.nc}
-FNVETC=${FNVETC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_type.tileX.nc}
-FNSOTC=${FNSOTC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.soil_type.tileX.nc}
-FNABSC=${FNABSC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.maximum_snow_albedo.tileX.nc}
-FNVMNC=${FNVMNC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc}
-FNVMXC=${FNVMXC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc}
-FNSLPC=${FNSLPC:-${FIXgfs}/orog/${CASE}/sfc/${CASE}.mx${OCNRES}.slope_type.tileX.nc}
+FNALBC2=${FNALBC2:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.facsf.tileX.nc}
+FNTG3C=${FNTG3C:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.substrate_temperature.tileX.nc}
+FNVEGC=${FNVEGC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc}
+FNALBC=${FNALBC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.snowfree_albedo.tileX.nc}
+FNVETC=${FNVETC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_type.tileX.nc}
+FNSOTC=${FNSOTC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.soil_type.tileX.nc}
+FNABSC=${FNABSC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.maximum_snow_albedo.tileX.nc}
+FNVMNC=${FNVMNC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc}
+FNVMXC=${FNVMXC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.vegetation_greenness.tileX.nc}
+FNSLPC=${FNSLPC:-${FIXorog}/${CASE}/sfc/${CASE}.mx${OCNRES}.slope_type.tileX.nc}
 FNMSKH=${FNMSKH:-${FIXgfs}/am/global_slmask.t1534.3072.1536.grb}
 NST_FILE=${NST_FILE:-"NULL"}
 FNTSFA=${FNTSFA:-${COMIN}/${PREINP}sstgrb${SUFINP}}
@@ -377,20 +385,21 @@ cat << EOF > fort.36
  &NAMCYC
   idim=$CRES, jdim=$CRES, lsoil=$LSOIL,
   iy=$iy, im=$im, id=$id, ih=$ih, fh=$FHOUR,
-  deltsfc=$DELTSFC,ialb=$IALB,use_ufo=$use_ufo,donst=$DONST,
-  do_sfccycle=$DO_SFCCYCLE,do_lndinc=$DO_LNDINC,isot=$ISOT,ivegsrc=$IVEGSRC,
+  deltsfc=$DELTSFC,ialb=$IALB,use_ufo=$use_ufo,donst="$DONST",
+  do_sfccycle=$DO_SFCCYCLE,do_landincr=$DO_LANDINCR,isot=$ISOT,ivegsrc=$IVEGSRC,
   zsea1_mm=$zsea1,zsea2_mm=$zsea2,MAX_TASKS=$MAX_TASKS_CY,
   frac_grid=$FRAC_GRID
  /
 EOF
 
+
 cat << EOF > fort.37
  &NAMSFCD
   NST_FILE="$NST_FILE",
-  DO_SOI_INC_GSI=$DO_SOI_INC_GSI,
-  DO_SNO_INC_JEDI=$DO_SNO_INC_JEDI,
-  DO_SOI_INC_JEDI=$DO_SOI_INC_JEDI,
-  lsoil_incr=3,
+  DO_SOILINCR=$GCYCLE_DO_SOILINCR,
+  DO_SNOWINCR=$GCYCLE_DO_SNOWINCR,
+  INTERP_LANDINCR=$GCYCLE_INTERP_LANDINCR,
+  lsoil_incr=$LSOIL_INCR, 
  /
 EOF
 
