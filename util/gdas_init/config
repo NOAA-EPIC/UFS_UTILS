@@ -55,16 +55,17 @@ basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/I
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/2023021918C384C192L64
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/2023022112.C384C192L127
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/AR2023022400
+basedir=/scratch1/NCEPDEV/nems/David.Burrows/ufs-utils-tiled/ICs/2023022112.C384C192L127
 
 EXTRACT_DIR=$basedir/input
-EXTRACT_DATA=no
+EXTRACT_DATA=yes
 
 RUN_CHGRES=yes
 
 yy=2023
 mm=02
-dd=19
-hh=18
+dd=21 #dd=19
+hh=18 #hh=18
 
 use_v16retro=no
 
