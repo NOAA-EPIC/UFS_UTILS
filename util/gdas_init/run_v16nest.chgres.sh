@@ -13,8 +13,11 @@ set -x
 MEMBER=$1
 
 FIX_FV3=$UFS_DIR/fix
-FIX_ORO=${FIX_FV3}/orog
+#FIX_ORO=${FIX_FV3}/orog
+FIX_ORO=/scratch1/BMC/gsd-fv3-dev/NCEPDEV/stmp3/Ning.Wang/nest3
 FIX_AM=${FIX_FV3}/am
+
+THOMPSON_AEROSOL_FILE=${FIX_AM}/Thompson_MP_MONTHLY_CLIMO.nc
 
 WORKDIR=${WORKDIR:-$OUTDIR/work.${MEMBER}}
 
@@ -52,10 +55,9 @@ cd $WORKDIR
 source $GDAS_INIT_DIR/set_fixed_files.sh
 
 cat << EOF > fort.41
-
 &config
  fix_dir_target_grid="${FIX_ORO}/${ORO_DIR}/sfc"
- mosaic_file_target_grid="${FIX_ORO}/${ORO_DIR}/${CTAR}_mosaic.nc"
+ mosaic_file_target_grid="${FIX_ORO}/${ORO_DIR}/${CTAR}_coarse_mosaic.nc"
  orog_dir_target_grid="${FIX_ORO}/${ORO_DIR}"
  orog_files_target_grid="${ORO_NAME}.tile1.nc","${ORO_NAME}.tile2.nc","${ORO_NAME}.tile3.nc","${ORO_NAME}.tile4.nc","${ORO_NAME}.tile5.nc","${ORO_NAME}.tile6.nc"
  data_dir_input_grid="${INPUT_DATA_DIR}"
@@ -69,6 +71,7 @@ cat << EOF > fort.41
  convert_sfc=.true.
  convert_nst=.true.
  input_type="gaussian_netcdf"
+ thomp_mp_climo_file="${THOMPSON_AEROSOL_FILE}"
  tracers="sphum","liq_wat","o3mr","ice_wat","rainwat","snowwat","graupel"
  tracers_input="spfh","clwmr","o3mr","icmr","rwmr","snmr","grle"
 /
@@ -82,6 +85,38 @@ if [ $rc != 0 ]; then
 fi
 
 $GDAS_INIT_DIR/copy_coldstart_files.sh $MEMBER $OUTDIR $yy $mm $dd $hh $INPUT_DATA_DIR
+
+cat << EOF > fort.41
+&config
+ fix_dir_target_grid="${FIX_ORO}/${ORO_DIR}/sfc"
+ mosaic_file_target_grid="${FIX_ORO}/${ORO_DIR}/${CTAR}_nested_mosaic.nc"
+ orog_dir_target_grid="${FIX_ORO}/${ORO_DIR}"
+ orog_files_target_grid="${ORO_NAME}.tile7.nc"
+ data_dir_input_grid="${INPUT_DATA_DIR}"
+ atm_files_input_grid="${ATMFILE}"
+ sfc_files_input_grid="${SFCFILE}"
+ vcoord_file_target_grid="${FIX_AM}/global_hyblev.l${LEVS}.txt"
+ cycle_mon=$mm
+ cycle_day=$dd
+ cycle_hour=$hh
+ convert_atm=.true.
+ convert_sfc=.true.
+ convert_nst=.true.
+ input_type="gaussian_netcdf"
+ thomp_mp_climo_file="${THOMPSON_AEROSOL_FILE}"
+ tracers="sphum","liq_wat","o3mr","ice_wat","rainwat","snowwat","graupel"
+ tracers_input="spfh","clwmr","o3mr","icmr","rwmr","snmr","grle"
+/
+EOF
+
+$APRUN $EXEC_DIR/chgres_cube
+rc=$?
+
+if [ $rc != 0 ]; then
+  exit $rc
+fi 
+
+$GDAS_INIT_DIR/copy_coldstart_files_nest_tile.sh $MEMBER $OUTDIR $yy $mm $dd $hh $INPUT_DATA_DIR
 
 rm -fr $WORKDIR
 

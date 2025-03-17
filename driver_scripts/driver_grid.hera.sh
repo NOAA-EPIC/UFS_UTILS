@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH -J fv3_grid_driver
-#SBATCH -A fv3-cpu
+#SBATCH -A rtrr
 #SBATCH --open-mode=truncate
 #SBATCH -o log.fv3_grid_driver
 #SBATCH -e log.fv3_grid_driver
@@ -74,10 +74,11 @@ module list
 # Set grid specs here.
 #-----------------------------------------------------------------------
 
-export gtype=uniform           # 'uniform', 'stretch', 'nest', 
+export gtype=stretch              # 'uniform', 'stretch', 'nest', 
                                # 'regional_gfdl', 'regional_esg'.
 
-export make_gsl_orog=false     # When 'true' will output 'oro' files for
+export nest_res=768              # global nest res
+export make_gsl_orog=true     # When 'true' will output 'oro' files for
                                # the GSL orographic drag suite.
 
 export vegsoilt_frac='.false.' # When .false., output dominant soil and 
@@ -117,23 +118,87 @@ if [ $gtype = uniform ]; then
   export binary_lake=1         # return 1 if lake_frac >= lake_cutoff & add_lake=T
   export ocn=${ocn:-"100"}     # use one of  "025", "050", "100", "500". Cannot be empty
 elif [ $gtype = stretch ]; then
-  export res=96
-  export stretch_fac=1.5       # Stretching factor for the grid
-  export target_lon=-97.5      # Center longitude of the highest resolution tile
-  export target_lat=35.5       # Center latitude of the highest resolution tile
-elif [ $gtype = nest ] || [ $gtype = regional_gfdl ]; then
-  export add_lake=false        # Add lake frac and depth to orography data.
+  export add_lake=true        # Add lake frac and depth to orography data.
   export lake_cutoff=0.20      # lake frac < lake_cutoff ignored when add_lake=T
-  export res=768
-  export stretch_fac=1.5       # Stretching factor for the grid
-  export target_lon=-97.5      # Center longitude of the highest resolution tile
-  export target_lat=38.5       # Center latitude of the highest resolution tile
-  export refine_ratio=3        # The refinement ratio
-  export istart_nest=123       # Starting i-direction index of nest grid in parent tile supergrid
-  export jstart_nest=331       # Starting j-direction index of nest grid in parent tile supergrid
-  export iend_nest=1402        # Ending i-direction index of nest grid in parent tile supergrid
-  export jend_nest=1194        # Ending j-direction index of nest grid in parent tile supergrid
-  export halo=4                # Lateral boundary halo
+  if [ $nest_res = 768 ]; then # UFS_AR nest global C768
+    export res=768
+    export stretch_fac=1.0001    # Stretching factor for the grid
+    export target_lon=-135.0     # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+  elif [ $nest_res = 384 ]; then # UFS_AR nest global C384
+    export res=384
+    export stretch_fac=1.0001    # Stretching factor for the grid
+    export target_lon=-135.0     # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+  elif [ $nest_res = 192 ]; then # UFS_AR nest global 192
+    export res=192
+    export stretch_fac=1.0001    # Stretching factor for the grid
+    export target_lon=-135.0     # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+  elif [ $nest_res = 96 ]; then  # UFS_AR nest global C96
+    export res=96
+    export stretch_fac=1.0001       # Stretching factor for the grid
+    export target_lon=-135.0      # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+  fi
+  # Original stuff from Ning.
+  # export res=96
+  # export stretch_fac=1.5       # Stretching factor for the grid
+  # export target_lon=-97.5      # Center longitude of the highest resolution tile
+  # export target_lat=35.5       # Center latitude of the highest resolution tile
+elif [ $gtype = nest ] || [ $gtype = regional_gfdl ]; then
+  export add_lake=true        # Add lake frac and depth to orography data.
+  export lake_cutoff=0.20      # lake frac < lake_cutoff ignored when add_lake=T
+  if [ $nest_res = 768 ]; then # UFS_AR nest global C768
+    export res=768
+    export stretch_fac=1.0001    # Stretching factor for the grid
+    export target_lon=-135.0     # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+    export refine_ratio=4        # The refinement ratio
+    export istart_nest=47        # Starting i-direction index of nest grid in parent tile supergrid
+    export jstart_nest=143       # Starting j-direction index of nest grid in parent tile supergrid
+    export iend_nest=1486        # Ending i-direction index of nest grid in parent tile supergrid
+    export jend_nest=1294        # Ending j-direction index of nest grid in parent tile supergrid
+  elif [ $nest_res = 384 ]; then # UFS_AR nest global C384
+    export res=384
+    export stretch_fac=1.0001    # Stretching factor for the grid
+    export target_lon=-135.0     # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+    export refine_ratio=4        # The refinement ratio
+    export istart_nest=25        # Starting i-direction index of nest grid in parent tile supergrid
+    export jstart_nest=73        # Starting j-direction index of nest grid in parent tile supergrid
+    export iend_nest=744         # Ending i-direction index of nest grid in parent tile supergrid
+    export jend_nest=648         # Ending j-direction index of nest grid in parent tile supergrid
+  elif [ $nest_res = 192 ]; then # UFS_AR nest global 192
+    export res=192
+    export stretch_fac=1.0001    # Stretching factor for the grid
+    export target_lon=-135.0     # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+    export refine_ratio=4        # The refinement ratio
+    export istart_nest=13        # Starting i-direction index of nest grid in parent tile supergrid
+    export jstart_nest=37        # Starting j-direction index of nest grid in parent tile supergrid
+    export iend_nest=372         # Ending i-direction index of nest grid in parent tile supergrid
+    export jend_nest=322         # Ending j-direction index of nest grid in parent tile supergrid
+  elif [ $nest_res = 96 ]; then  # UFS_AR nest global C96
+    export res=96
+    export stretch_fac=1.0001       # Stretching factor for the grid
+    export target_lon=-135.0      # Center longitude of the highest resolution tile
+    export target_lat=32.5       # Center latitude of the highest resolution tile
+    export refine_ratio=4        # The refinement ratio
+    export istart_nest=7       # Starting i-direction index of nest grid in parent tile supergrid
+    export jstart_nest=17       # Starting j-direction index of nest grid in parent tile supergrid
+    export iend_nest=186        # Ending i-direction index of nest grid in parent tile supergrid
+    export jend_nest=160        # Ending j-direction index of nest grid in parent tile supergrid
+  fi
+#  export stretch_fac=1.5       # Stretching factor for the grid
+#  export target_lon=-97.5      # Center longitude of the highest resolution tile
+#  export target_lat=38.5       # Center latitude of the highest resolution tile
+#  export refine_ratio=3        # The refinement ratio
+#  export istart_nest=123       # Starting i-direction index of nest grid in parent tile supergrid
+#  export jstart_nest=331       # Starting j-direction index of nest grid in parent tile supergrid
+#  export iend_nest=1402        # Ending i-direction index of nest grid in parent tile supergrid
+#  export jend_nest=1194        # Ending j-direction index of nest grid in parent tile supergrid
+  export halo=3                # Lateral boundary halo
 elif [ $gtype = regional_esg ] ; then
   export res=-999              # equivalent resolution is computed
   export target_lon=-97.5      # Center longitude of grid
@@ -158,9 +223,11 @@ fi
 #-----------------------------------------------------------------------
 
 export home_dir=$SLURM_SUBMIT_DIR/..
-export TEMP_DIR=/scratch2/NCEPDEV/stmp1/$LOGNAME/fv3_grid.$gtype
-export out_dir=/scratch2/NCEPDEV/stmp1/$LOGNAME/my_grids
-
+#export TEMP_DIR=/scratch2/NCEPDEV/stmp1/$LOGNAME/fv3_grid.$gtype
+#export out_dir=/scratch2/NCEPDEV/stmp1/$LOGNAME/my_grids
+samdir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/UFS_UTILS_ufscom/driver_scripts/
+export TEMP_DIR=$samdir/fv3_grid/$gtype-$nest_res/temp
+export out_dir=$samdir/fv3_grid/$gtype-$nest_res/out
 #-----------------------------------------------------------------------
 # Should not need to change anything below here.
 #-----------------------------------------------------------------------

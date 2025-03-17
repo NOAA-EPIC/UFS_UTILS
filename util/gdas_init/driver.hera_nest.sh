@@ -18,7 +18,7 @@ module list
 module use -a /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
 module load prod_util/1.1.0
 
-PROJECT_CODE=wrfruc
+PROJECT_CODE=rtrr
 QUEUE=batch
 
 export machine=hera
@@ -120,13 +120,15 @@ if [ $RUN_CHGRES == yes ]; then
 
   export APRUN=srun
   NODES=3
-  WALLT="0:15:00"
+  WALLT="0:45:00"
   export OMP_NUM_THREADS=1
-  if [ $CRES_HIRES == 'C768' ] ; then
+  if [ $CRES_HIRES == 'C384' ] ; then
     NODES=5
-  elif [ $CRES_HIRES == 'C1152' ] ; then
+  elif [ $CRES_HIRES == 'C768' ] ; then
     NODES=8
-    WALLT="0:20:00"
+  elif [ $CRES_HIRES == 'C1152' ] ; then
+    NODES=16
+    WALLT="0:45:00"
   fi
   case $gfs_ver in
     v12 | v13)
@@ -155,7 +157,7 @@ if [ $RUN_CHGRES == yes ]; then
       ;;
     v16)
       sbatch --parsable --ntasks-per-node=6 --nodes=${NODES} -t $WALLT -A $PROJECT_CODE -q $QUEUE -J chgres_${CDUMP} \
-      -o log.${CDUMP} -e log.${CDUMP} ${DEPEND} run_v16.chgres.sh ${CDUMP}
+      -o log.${CDUMP} -e log.${CDUMP} ${DEPEND} run_v16nest.chgres.sh ${CDUMP}
       ;;
   esac
 
@@ -171,7 +173,7 @@ if [ $RUN_CHGRES == yes ]; then
     else
 
       MEMBER=1
-      while [ $MEMBER -le 3 ]; do
+      while [ $MEMBER -le 80 ]; do
         if [ $MEMBER -lt 10 ]; then
           MEMBER_CH="00${MEMBER}"
         else
@@ -195,7 +197,7 @@ if [ $RUN_CHGRES == yes ]; then
             ;;
           v16)
               sbatch --parsable --ntasks-per-node=12 --nodes=1 -t $WALLT -A $PROJECT_CODE -q $QUEUE -J chgres_${MEMBER_CH} \
-              -o log.${MEMBER_CH} -e log.${MEMBER_CH} ${DEPEND} run_v16.chgres.sh ${MEMBER_CH}
+              -o log.${MEMBER_CH} -e log.${MEMBER_CH} ${DEPEND} run_v16nest.chgres.sh ${MEMBER_CH}
             ;;
         esac
         MEMBER=$(( $MEMBER + 1 ))

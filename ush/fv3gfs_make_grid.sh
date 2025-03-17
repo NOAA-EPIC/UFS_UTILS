@@ -102,7 +102,7 @@ elif  [ $gtype = nest ] || [ $gtype = regional_gfdl ] ; then
   fi
   $APRUN $executable --grid_type gnomonic_ed --nlon $nx --grid_name C${res}_grid \
                      --do_schmidt --stretch_factor ${stretch_fac} --target_lon ${target_lon} --target_lat ${target_lat} \
-                     --nest_grid --parent_tile 6 --refine_ratio $refine_ratio --istart_nest $istart_nest --jstart_nest $jstart_nest \
+                     --nest_grid 1 --parent_tile 6 --refine_ratio $refine_ratio --istart_nest $istart_nest --jstart_nest $jstart_nest \
                      --iend_nest $iend_nest --jend_nest $jend_nest --halo $halo --great_circle_algorithm
 
 elif [ $gtype = regional_esg ] ; then

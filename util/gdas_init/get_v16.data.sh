@@ -14,6 +14,7 @@ bundle=$1
 
 set -x
 
+echo $EXTRACT_DIR
 cd $EXTRACT_DIR
 
 date10_m6=`$NDATE -6 $yy$mm$dd$hh`
