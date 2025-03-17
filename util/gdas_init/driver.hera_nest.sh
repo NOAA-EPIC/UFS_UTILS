@@ -18,7 +18,7 @@ module list
 module use -a /scratch2/NCEPDEV/nwprod/NCEPLIBS/modulefiles
 module load prod_util/1.1.0
 
-PROJECT_CODE=rtrr
+PROJECT_CODE=nems #rtrr
 QUEUE=batch
 
 export machine=hera
