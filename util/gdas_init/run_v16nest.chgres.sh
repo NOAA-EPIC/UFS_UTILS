@@ -14,7 +14,7 @@ MEMBER=$1
 
 FIX_FV3=$UFS_DIR/fix
 FIX_ORO=${FIX_FV3}/orog
-#FIX_ORO=/scratch1/BMC/gsd-fv3-dev/NCEPDEV/stmp3/Ning.Wang/nest3
+FIX_ORO=/scratch1/BMC/gsd-fv3-dev/NCEPDEV/stmp3/Ning.Wang/nest3
 FIX_AM=${FIX_FV3}/am
 
 THOMPSON_AEROSOL_FILE=${FIX_AM}/Thompson_MP_MONTHLY_CLIMO.nc

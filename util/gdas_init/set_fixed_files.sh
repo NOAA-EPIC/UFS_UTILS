@@ -29,7 +29,7 @@ fi
 
 ORO_DIR="${CTAR}"
 ORO_NAME="${CTAR}.mx${OCNRES}_oro_data"
-#ORO_NAME="${CTAR}_oro_data"
+ORO_NAME="${CTAR}_oro_data"
 
 #---------------------------------------------------------------------------
 # When using the v15/v16 tiled warm restart data as input to the chgres
