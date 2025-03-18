@@ -1,7 +1,7 @@
 var land__increments_8f90 =
 [
+    [ "add_increment_snow", "land__increments_8f90.html#ae260c4c211018b060db3dfb15fdf74d6", null ],
     [ "add_increment_soil", "land__increments_8f90.html#a4e2112483a03c4fc166002c542b94c9b", null ],
-    [ "add_jedi_increment_snow", "land__increments_8f90.html#aea7b9df65262fe035b089f69498bad78", null ],
     [ "apply_land_da_adjustments_snd", "land__increments_8f90.html#a46cacafd29fb14ec2945614634e35478", null ],
     [ "apply_land_da_adjustments_soil", "land__increments_8f90.html#af5d9bf149e88c658e759c0809e6fa433", null ],
     [ "calculate_landinc_mask", "land__increments_8f90.html#ac7ee80c5f562ffae07252d86f8bca0e1", null ],

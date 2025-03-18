@@ -119,6 +119,7 @@ Remapping procedure</h2>
 <li>Vector fields are re-rotated back to model index direction (EN-&gt;IJ) and remapped back to their native stagger locations.</li>
 <li>Fields are written into a warm-start file.</li>
 </ol>
+<p>For CICE6, an additional 2-step QC is performed on the source restart files. This procedure accounts for possible inconsistent fields that may have been generated as part of the marine DA process. The QC process affects 4 fields only: <code>aicen</code>, <code>vicen</code>, <code>vsnon</code> and <code>Tsfcn</code>. The first step of the QC is to remove any values of the 4 fields which are located where the CICE grid has land. The second step is to remove any ice or snow volume where there is no associated ice coverage. The QC process does not impact source files which do not contain these physical inconsistencies.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Note on rotation angles</h2>
 <p>The rotation angle retrieved from the master grid file is <code>anglet</code>, which is defined in the same sense as used MOM6. This is the opposite sense to the use in CICE6. The rotation formulas implement rotation in the same sense as MOM6. Since <code>-sin(-angle) == sin(angle)</code>, no sign change of the angle is required for rotation of the CICE6 vectors. This is in contrast to the <code>ocnpost</code> routine, where the angle used is retrieved from CICE6's own history file and requires a sign change prior to use in the rotation formulas.</p>

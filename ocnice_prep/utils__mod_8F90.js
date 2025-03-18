@@ -18,5 +18,7 @@ var utils__mod_8F90 =
     [ "packarrays3d", "utils__mod_8F90.html#ae1305d59afa08818379653df6c6ed662", null ],
     [ "remap1d", "utils__mod_8F90.html#aac28725ec398f99a91ab33b5c5cf7422", null ],
     [ "remap2d", "utils__mod_8F90.html#a4e78c060044a9fd7ff2e06f0df84e72f", null ],
-    [ "remap3d", "utils__mod_8F90.html#ac493d052c9dc9c8f4a43095ced00c04e", null ]
+    [ "remap3d", "utils__mod_8F90.html#ac493d052c9dc9c8f4a43095ced00c04e", null ],
+    [ "zero_out_land_ice", "utils__mod_8F90.html#a12080f8bb00362b03516948e60c066f4", null ],
+    [ "zero_out_phantom_ice", "utils__mod_8F90.html#a82cf58366a061f1ff2770e9933d53184", null ]
 ];

@@ -24,9 +24,10 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "UFS_UTILS", "index.html", [
-    [ "UFS_UTILS", "index.html#autotoc_md0", [
-      [ "Documentation for Previous Versions of UFS_UTILS", "index.html#autotoc_md1", null ],
-      [ "The Utilities", "index.html#autotoc_md2", null ]
+    [ "UFS_UTILS", "index.html#autotoc_md0", null ],
+    [ "UFS_UTILS - EPIC Fork", "index.html#autotoc_md1", [
+      [ "Documentation for Previous Versions of UFS_UTILS", "index.html#autotoc_md2", null ],
+      [ "The Utilities", "index.html#autotoc_md3", null ]
     ] ]
   ] ]
 ];

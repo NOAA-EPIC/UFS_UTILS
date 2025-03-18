@@ -1,8 +1,8 @@
-.TH "/scratch1/NCEPDEV/da/George.Gayno/ufs_utils.git/UFS_UTILS.upstream/sorc/cpld_gridgen.fd/grdvars.F90" 3 "Tue Jan 21 2025" "Version 1.13.0" "cpld_gridgen" \" -*- nroff -*-
+.TH "/scratch2/NAGAPE/epic/Gillian.Petro/UFS_UTILS-epic/sorc/cpld_gridgen.fd/grdvars.F90" 3 "Tue Mar 18 2025" "Version 1.13.0" "cpld_gridgen" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/scratch1/NCEPDEV/da/George.Gayno/ufs_utils.git/UFS_UTILS.upstream/sorc/cpld_gridgen.fd/grdvars.F90 \- Define and allocate required grid variables\&.  
+/scratch2/NAGAPE/epic/Gillian.Petro/UFS_UTILS-epic/sorc/cpld_gridgen.fd/grdvars.F90 \- Define and allocate required grid variables\&.  
 
 .SH SYNOPSIS
 .br
@@ -35,9 +35,9 @@
 .br
 .RI "The grid areas of the Ct grid cell in m2\&. "
 .ti -1c
-.RI "integer, dimension(nar), parameter \fBgrdvars::catm\fP = (/48, 96, 192, 384, 768, 1152/)"
+.RI "integer, dimension(:), allocatable \fBgrdvars::catm\fP"
 .br
-.RI "the ATM resolutions for mapped ocean masks "
+.RI "The ATM resolutions for mapped ocean masks\&. "
 .ti -1c
 .RI "logical \fBgrdvars::debug\fP"
 .br
@@ -187,6 +187,10 @@
 .br
 .RI "The masking depth for MOM6\&. "
 .ti -1c
+.RI "integer, parameter \fBgrdvars::maxatmres\fP = 10"
+.br
+.RI "The maximum number of possible ATM resolutions\&. "
+.ti -1c
 .RI "real(kind=real_kind), parameter \fBgrdvars::maximum_depth\fP = 6500\&.0"
 .br
 .RI "The maximum depth for MOM6\&. "
@@ -198,10 +202,6 @@
 .RI "real(kind=real_kind), parameter \fBgrdvars::minimum_depth\fP = 9\&.5"
 .br
 .RI "The minimum depth for MOM6\&. "
-.ti -1c
-.RI "integer, parameter \fBgrdvars::nar\fP = 6"
-.br
-.RI "the number of possible ATM resolutions "
 .ti -1c
 .RI "integer, parameter \fBgrdvars::ncoord\fP = 2*4\&."
 .br
@@ -326,7 +326,7 @@ Denise Worthen
 .PP
 
 .PP
-Definition at line 175 of file grdvars\&.F90\&.
+Definition at line 176 of file grdvars\&.F90\&.
 .SH "Variable Documentation"
 .PP 
 .SS "real(dbl_kind), dimension(:,:), allocatable grdvars::angchk"
@@ -353,12 +353,12 @@ Definition at line 96 of file grdvars\&.F90\&.
 The grid areas of the Ct grid cell in m2\&. 
 .PP
 Definition at line 95 of file grdvars\&.F90\&.
-.SS "integer, dimension(nar), parameter grdvars::catm = (/48, 96, 192, 384, 768, 1152/)"
+.SS "integer, dimension(:), allocatable grdvars::catm"
 
 .PP
-the ATM resolutions for mapped ocean masks 
+The ATM resolutions for mapped ocean masks\&. 
 .PP
-Definition at line 167 of file grdvars\&.F90\&.
+Definition at line 168 of file grdvars\&.F90\&.
 .SS "logical grdvars::debug"
 
 .PP
@@ -581,6 +581,12 @@ Definition at line 109 of file grdvars\&.F90\&.
 The masking depth for MOM6\&. Depths shallower than minimum_depth but deeper than masking_depth are rounded to minimum_depth 
 .PP
 Definition at line 161 of file grdvars\&.F90\&.
+.SS "integer, parameter grdvars::maxatmres = 10"
+
+.PP
+The maximum number of possible ATM resolutions\&. 
+.PP
+Definition at line 167 of file grdvars\&.F90\&.
 .SS "real(kind=real_kind), parameter grdvars::maximum_depth = 6500\&.0"
 
 .PP
@@ -599,12 +605,6 @@ Definition at line 164 of file grdvars\&.F90\&.
 The minimum depth for MOM6\&. 
 .PP
 Definition at line 159 of file grdvars\&.F90\&.
-.SS "integer, parameter grdvars::nar = 6"
-
-.PP
-the number of possible ATM resolutions 
-.PP
-Definition at line 166 of file grdvars\&.F90\&.
 .SS "integer, parameter grdvars::ncoord = 2*4\&."
 
 .PP
