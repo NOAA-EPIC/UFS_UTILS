@@ -1,13 +1,13 @@
 #!/bin/bash
 
 #SBATCH -J fv3_grid_driver
-#SBATCH -A rtrr
+#SBATCH -A nems
 #SBATCH --open-mode=truncate
 #SBATCH -o log.fv3_grid_driver
 #SBATCH -e log.fv3_grid_driver
 #SBATCH --nodes=6 --ntasks-per-node=12
-#SBATCH --partition=bigmem
-#SBATCH -q debug
+#SBATCH --partition=hera
+#SBATCH -q batch
 #SBATCH -t 00:30:00
 
 #-----------------------------------------------------------------------
@@ -74,10 +74,10 @@ module list
 # Set grid specs here.
 #-----------------------------------------------------------------------
 
-export gtype=stretch              # 'uniform', 'stretch', 'nest', 
+export gtype=nest              # 'uniform', 'stretch', 'nest', 
                                # 'regional_gfdl', 'regional_esg'.
 
-export nest_res=768              # global nest res
+export nest_res=192              # global nest res
 export make_gsl_orog=true     # When 'true' will output 'oro' files for
                                # the GSL orographic drag suite.
 
@@ -226,6 +226,7 @@ export home_dir=$SLURM_SUBMIT_DIR/..
 #export TEMP_DIR=/scratch2/NCEPDEV/stmp1/$LOGNAME/fv3_grid.$gtype
 #export out_dir=/scratch2/NCEPDEV/stmp1/$LOGNAME/my_grids
 samdir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/UFS_UTILS_ufscom/driver_scripts/
+samdir=/scratch1/NCEPDEV/nems/David.Burrows/ufs-utils-tiled/ufs_utils_tile_dev_v3/driver_scripts
 export TEMP_DIR=$samdir/fv3_grid/$gtype-$nest_res/temp
 export out_dir=$samdir/fv3_grid/$gtype-$nest_res/out
 #-----------------------------------------------------------------------

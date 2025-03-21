@@ -55,7 +55,7 @@ basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/I
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/2023021918C384C192L64
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/2023022112.C384C192L127
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/AR2023022400
-basedir=/scratch1/NCEPDEV/nems/David.Burrows/ufs-utils-tiled/ICs/2023022112.C384C192L127
+basedir=/scratch1/NCEPDEV/nems/David.Burrows/ufs-utils-tiled/ICs/2023022118.C384C192L127_myStagedFixed
 
 EXTRACT_DIR=$basedir/input
 EXTRACT_DATA=yes

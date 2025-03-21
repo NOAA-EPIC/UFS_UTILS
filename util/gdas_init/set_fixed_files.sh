@@ -28,7 +28,7 @@ else
 fi
 
 ORO_DIR="${CTAR}"
-ORO_NAME="${CTAR}.mx${OCNRES}_oro_data"
+#ORO_NAME="${CTAR}.mx${OCNRES}_oro_data"
 ORO_NAME="${CTAR}_oro_data"
 
 #---------------------------------------------------------------------------
