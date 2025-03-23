@@ -25,7 +25,7 @@ var NAVTREE =
 [
   [ "orog_mask_tools", "index.html", [
     [ "Introduction", "index.html#autotoc_md1", null ],
-    [ "README", "md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS_UTILS-epic_sorc_orog_mask_tools_8fd_docs_README.html", null ],
+    [ "README", "md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS-UTILS-srw_sorc_orog_mask_tools_8fd_docs_README.html", null ],
     [ "Data Types List", "annotated.html", [
       [ "Data Types List", "annotated.html", "annotated_dup" ],
       [ "Data Fields", "functions.html", [

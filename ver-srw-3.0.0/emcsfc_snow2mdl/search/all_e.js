@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['readme',['README',['../md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS_UTILS-epic_sorc_emcsfc_snow2mdl_8fd_docs_README.html',1,'']]],
+  ['readme',['README',['../md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS-UTILS-srw_sorc_emcsfc_snow2mdl_8fd_docs_README.html',1,'']]],
   ['read_5fafwa_5fbinary',['read_afwa_binary',['../namespacesnowdat.html#a097b7b0377daf37b721b0c871762e24d',1,'snowdat']]],
   ['read_5fafwa_5fmask',['read_afwa_mask',['../namespacesnowdat.html#a328b01fb9013c27f0093d416f21ab47e',1,'snowdat']]],
   ['read_5fconfig_5fnml',['read_config_nml',['../namespaceprogram__setup.html#a40111d93a5e305839de5e43e78183273',1,'program_setup']]],

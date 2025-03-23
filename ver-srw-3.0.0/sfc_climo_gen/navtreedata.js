@@ -25,7 +25,7 @@ var NAVTREE =
 [
   [ "sfc_climo_gen", "index.html", [
     [ "Introduction", "index.html#autotoc_md1", null ],
-    [ "README", "md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS_UTILS-epic_sorc_sfc_climo_gen_8fd_docs_README.html", null ],
+    [ "README", "md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS-UTILS-srw_sorc_sfc_climo_gen_8fd_docs_README.html", null ],
     [ "Modules", "namespaces.html", [
       [ "Modules List", "namespaces.html", "namespaces_dup" ],
       [ "Module Members", "namespacemembers.html", [
