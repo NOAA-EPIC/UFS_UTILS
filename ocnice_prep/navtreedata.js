@@ -32,7 +32,7 @@ var NAVTREE =
       [ "Note on rotation angles", "index.html#autotoc_md6", null ],
       [ "Required files", "index.html#autotoc_md7", null ]
     ] ],
-    [ "README", "md__scratch1_NCEPDEV_da_George_8Gayno_ufs_utils_8git_UFS_UTILS_8upstream_sorc_ocnice_prep_8fd_docs_README.html", null ],
+    [ "README", "md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS_UTILS-epic_sorc_ocnice_prep_8fd_docs_README.html", null ],
     [ "Data Types List", "annotated.html", [
       [ "Data Types List", "annotated.html", "annotated_dup" ],
       [ "Data Fields", "functions.html", [

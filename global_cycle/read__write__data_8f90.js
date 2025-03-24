@@ -25,7 +25,7 @@ var read__write__data_8f90 =
     [ "get_tf_clm_dim", "read__write__data_8f90.html#a084f99d1bb72a24a7c733803969e15b3", null ],
     [ "nc_check", "read__write__data_8f90.html#aaf2a37ad68d9fdbc39a29fef126f58ed", null ],
     [ "netcdf_err", "read__write__data_8f90.html#ad9df1dac8cbabb67bc5dc49ab196684e", null ],
-    [ "read_data", "read__write__data_8f90.html#ad2333876ddd0d60bf8c1a4df0963ee3a", null ],
+    [ "read_data", "read__write__data_8f90.html#ab770af3576168e520cc2e56bbd661fd5", null ],
     [ "read_gsi_data", "read__write__data_8f90.html#a6d1969abebaa42aa2fcf733fc62ac656", null ],
     [ "read_lat_lon_orog", "read__write__data_8f90.html#ae20246264d3a55cc067a12fd72259449", null ],
     [ "read_salclm_gfs_nc", "read__write__data_8f90.html#ad4c51126bd4bdc11cb03cb957d7ee4b7", null ],

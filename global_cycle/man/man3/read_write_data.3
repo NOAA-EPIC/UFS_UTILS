@@ -1,4 +1,4 @@
-.TH "read_write_data" 3 "Tue Jan 21 2025" "Version 1.13.0" "global_cycle" \" -*- nroff -*-
+.TH "read_write_data" 3 "Wed Mar 19 2025" "Version 1.13.0" "global_cycle" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -34,7 +34,7 @@ read_write_data \- This module contains routines that read and write data\&.
 .br
 .RI "If a NetCDF call returns an error, print out a user-supplied message and the NetCDF library message\&. "
 .ti -1c
-.RI "subroutine, public \fBread_data\fP (LSOIL, LENSFC, DO_NSST, DO_SNO_INC_JEDI, DO_SOI_INC_JEDI, INC_FILE, IS_NOAHMP, TSFFCS, SMCFCS, SWEFCS, STCFCS, TG3FCS, ZORFCS, CVFCS, CVBFCS, CVTFCS, ALBFCS, VEGFCS, SLIFCS, CNPFCS, F10M, VETFCS, SOTFCS, ALFFCS, USTAR, FMM, FHH, SIHFCS, SICFCS, SITFCS, TPRCP, SRFLAG, SNDFCS, VMNFCS, VMXFCS, SLCFCS, STCINC, SLCINC, SLPFCS, ABSFCS, T2M, Q2M, SLMASK, ZSOIL, NSST)"
+.RI "subroutine, public \fBread_data\fP (LSOIL, LENSFC, DO_NSST, IS_NOAHMP, FNAME_INC, TSFFCS, SMCFCS, SWEFCS, STCFCS, TG3FCS, ZORFCS, CVFCS, CVBFCS, CVTFCS, ALBFCS, VEGFCS, SLIFCS, CNPFCS, F10M, VETFCS, SOTFCS, ALFFCS, USTAR, FMM, FHH, SIHFCS, SICFCS, SITFCS, TPRCP, SRFLAG, SNDFCS, VMNFCS, VMXFCS, SLCFCS, STCINC, SLCINC, LSOIL_INCR, SLPFCS, ABSFCS, T2M, Q2M, SLMASK, ZSOIL, NSST)"
 .br
 .RI "Read the first guess surface records and nsst records (if selected) for a single cubed-sphere tile\&. "
 .ti -1c
@@ -196,7 +196,7 @@ Xu Li NOAA/EMC
 .PP
 
 .PP
-Definition at line 1922 of file read_write_data\&.f90\&.
+Definition at line 1970 of file read_write_data\&.f90\&.
 .PP
 References nc_check()\&.
 .PP
@@ -227,7 +227,7 @@ Xu Li NOAA/EMC
 .PP
 
 .PP
-Definition at line 1793 of file read_write_data\&.f90\&.
+Definition at line 1841 of file read_write_data\&.f90\&.
 .PP
 Referenced by get_tf_clm()\&.
 .SS "subroutine read_write_data::nc_check (integer, intent(in) status)"
@@ -247,7 +247,7 @@ Xu Li NOAA/EMC
 .PP
 
 .PP
-Definition at line 1959 of file read_write_data\&.f90\&.
+Definition at line 2007 of file read_write_data\&.f90\&.
 .PP
 Referenced by get_dim_nc(), and read_salclm_gfs_nc()\&.
 .SS "subroutine read_write_data::netcdf_err (integer, intent(in) ERR, character(len=*), intent(in) STRING)"
@@ -272,7 +272,7 @@ George Gayno NOAA/EMC
 Definition at line 876 of file read_write_data\&.f90\&.
 .PP
 Referenced by read_data(), read_gsi_data(), read_lat_lon_orog(), remove_checksum(), and write_data()\&.
-.SS "subroutine, public read_write_data::read_data (integer, intent(in) LSOIL, integer, intent(in) LENSFC, logical, intent(in) DO_NSST, logical, intent(in) DO_SNO_INC_JEDI, logical, intent(in) DO_SOI_INC_JEDI, logical, intent(in) INC_FILE, logical, intent(out), optional IS_NOAHMP, real, dimension(lensfc), intent(out), optional TSFFCS, real, dimension(lensfc,lsoil), intent(out), optional SMCFCS, real, dimension(lensfc), intent(out), optional SWEFCS, real, dimension(lensfc,lsoil), intent(out), optional STCFCS, real, dimension(lensfc), intent(out), optional TG3FCS, real, dimension(lensfc), intent(out), optional ZORFCS, real, dimension(lensfc), intent(out), optional CVFCS, real, dimension(lensfc), intent(out), optional CVBFCS, real, dimension(lensfc), intent(out), optional CVTFCS, real, dimension(lensfc,4), intent(out), optional ALBFCS, real, dimension(lensfc), intent(out), optional VEGFCS, real, dimension(lensfc), intent(out), optional SLIFCS, real, dimension(lensfc), intent(out), optional CNPFCS, real, dimension(lensfc), intent(out), optional F10M, real, dimension(lensfc), intent(out), optional VETFCS, real, dimension(lensfc), intent(out), optional SOTFCS, real, dimension(lensfc,2), intent(out), optional ALFFCS, real, dimension(lensfc), intent(out), optional USTAR, real, dimension(lensfc), intent(out), optional FMM, real, dimension(lensfc), intent(out), optional FHH, real, dimension(lensfc), intent(out), optional SIHFCS, real, dimension(lensfc), intent(out), optional SICFCS, real, dimension(lensfc), intent(out), optional SITFCS, real, dimension(lensfc), intent(out), optional TPRCP, real, dimension(lensfc), intent(out), optional SRFLAG, real, dimension(lensfc), intent(out), optional SNDFCS, real, dimension(lensfc), intent(out), optional VMNFCS, real, dimension(lensfc), intent(out), optional VMXFCS, real, dimension(lensfc,lsoil), intent(out), optional SLCFCS, real, dimension(lensfc,lsoil), intent(out), optional STCINC, real, dimension(lensfc,lsoil), intent(out), optional SLCINC, real, dimension(lensfc), intent(out), optional SLPFCS, real, dimension(lensfc), intent(out), optional ABSFCS, real, dimension(lensfc), intent(out), optional T2M, real, dimension(lensfc), intent(out), optional Q2M, real, dimension(lensfc), intent(out), optional SLMASK, real(kind=4), dimension(lsoil), intent(out), optional ZSOIL, type(\fBnsst_data\fP), optional NSST)"
+.SS "subroutine, public read_write_data::read_data (integer, intent(in) LSOIL, integer, intent(in) LENSFC, logical, intent(in) DO_NSST, logical, intent(out), optional IS_NOAHMP, character(len=50), intent(in), optional FNAME_INC, real, dimension(lensfc), intent(out), optional TSFFCS, real, dimension(lensfc,lsoil), intent(out), optional SMCFCS, real, dimension(lensfc), intent(out), optional SWEFCS, real, dimension(lensfc,lsoil), intent(out), optional STCFCS, real, dimension(lensfc), intent(out), optional TG3FCS, real, dimension(lensfc), intent(out), optional ZORFCS, real, dimension(lensfc), intent(out), optional CVFCS, real, dimension(lensfc), intent(out), optional CVBFCS, real, dimension(lensfc), intent(out), optional CVTFCS, real, dimension(lensfc,4), intent(out), optional ALBFCS, real, dimension(lensfc), intent(out), optional VEGFCS, real, dimension(lensfc), intent(out), optional SLIFCS, real, dimension(lensfc), intent(out), optional CNPFCS, real, dimension(lensfc), intent(out), optional F10M, real, dimension(lensfc), intent(out), optional VETFCS, real, dimension(lensfc), intent(out), optional SOTFCS, real, dimension(lensfc,2), intent(out), optional ALFFCS, real, dimension(lensfc), intent(out), optional USTAR, real, dimension(lensfc), intent(out), optional FMM, real, dimension(lensfc), intent(out), optional FHH, real, dimension(lensfc), intent(out), optional SIHFCS, real, dimension(lensfc), intent(out), optional SICFCS, real, dimension(lensfc), intent(out), optional SITFCS, real, dimension(lensfc), intent(out), optional TPRCP, real, dimension(lensfc), intent(out), optional SRFLAG, real, dimension(lensfc), intent(out), optional SNDFCS, real, dimension(lensfc), intent(out), optional VMNFCS, real, dimension(lensfc), intent(out), optional VMXFCS, real, dimension(lensfc,lsoil), intent(out), optional SLCFCS, real, dimension(lensfc,lsoil), intent(out), optional STCINC, real, dimension(lensfc,lsoil), intent(out), optional SLCINC, integer, intent(in), optional LSOIL_INCR, real, dimension(lensfc), intent(out), optional SLPFCS, real, dimension(lensfc), intent(out), optional ABSFCS, real, dimension(lensfc), intent(out), optional T2M, real, dimension(lensfc), intent(out), optional Q2M, real, dimension(lensfc), intent(out), optional SLMASK, real(kind=4), dimension(lsoil), intent(out), optional ZSOIL, type(\fBnsst_data\fP), optional NSST)"
 
 .PP
 Read the first guess surface records and nsst records (if selected) for a single cubed-sphere tile\&. 
@@ -285,13 +285,9 @@ Read the first guess surface records and nsst records (if selected) for a single
 .br
 \fIDO_NSST\fP When true, nsst fields are read\&. 
 .br
-\fIDO_SNO_INC_JEDI\fP When true, read in snow increment file 
-.br
-\fIDO_SOI_INC_JEDI\fP When true, read in soil increment file 
-.br
-\fIINC_FILE\fP When true, read from an increment file\&. False reads from a restart file\&. increments are on the cubed-sphere tiles 
-.br
 \fIIS_NOAHMP\fP When true, process for the Noah-MP LSM\&. 
+.br
+\fIFNAME_INC\fP Name of the increment file\&. 
 .br
 \fITSFFCS\fP Skin Temperature\&. 
 .br
@@ -368,6 +364,8 @@ Read the first guess surface records and nsst records (if selected) for a single
 \fISLCINC\fP Liquid soil moisture increments on the cubed-sphere tiles 
 .br
 \fISTCINC\fP Soil temperature increments on the cubed-sphere tiles 
+.br
+\fILSOIL_INCR\fP Number of soil layers (from top) to apply soil increments to 
 .RE
 .PP
 \fBAuthor:\fP
@@ -379,7 +377,7 @@ Yuan Xue: add capability to read soil related increments on the cubed-sphere til
 .PP
 
 .PP
-Definition at line 1101 of file read_write_data\&.f90\&.
+Definition at line 1098 of file read_write_data\&.f90\&.
 .PP
 References netcdf_err()\&.
 .PP
@@ -477,7 +475,7 @@ Xu Li NOAA/EMC
 .PP
 
 .PP
-Definition at line 1851 of file read_write_data\&.f90\&.
+Definition at line 1899 of file read_write_data\&.f90\&.
 .PP
 References nc_check()\&.
 .PP
@@ -521,7 +519,7 @@ Xu Li NOAA/EMC
 .PP
 
 .PP
-Definition at line 1651 of file read_write_data\&.f90\&.
+Definition at line 1699 of file read_write_data\&.f90\&.
 .PP
 Referenced by get_tf_clm_ta()\&.
 .SS "subroutine read_write_data::remove_checksum (integer, intent(in) ncid, integer, intent(in) id_var)"

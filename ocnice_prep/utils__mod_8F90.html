@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ocnice_prep: /scratch1/NCEPDEV/da/George.Gayno/ufs_utils.git/UFS_UTILS.upstream/sorc/ocnice_prep.fd/utils_mod.F90 File Reference</title>
+<title>ocnice_prep: /scratch2/NAGAPE/epic/Gillian.Petro/UFS_UTILS-epic/sorc/ocnice_prep.fd/utils_mod.F90 File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -156,6 +156,12 @@ Functions/Subroutines</h2></td></tr>
 <tr class="memitem:ac493d052c9dc9c8f4a43095ced00c04e"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__mod_8F90.html#ac493d052c9dc9c8f4a43095ced00c04e">utils_mod::remap3d</a> (fname, nk, nflds, src_field, dst_field)</td></tr>
 <tr class="memdesc:ac493d052c9dc9c8f4a43095ced00c04e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remap a field packed array of nk levels and nflds fields.  <a href="utils__mod_8F90.html#ac493d052c9dc9c8f4a43095ced00c04e">More...</a><br /></td></tr>
 <tr class="separator:ac493d052c9dc9c8f4a43095ced00c04e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12080f8bb00362b03516948e60c066f4"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__mod_8F90.html#a12080f8bb00362b03516948e60c066f4">utils_mod::zero_out_land_ice</a> (mask, fout, icnt)</td></tr>
+<tr class="memdesc:a12080f8bb00362b03516948e60c066f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset field values to zero on land.  <a href="utils__mod_8F90.html#a12080f8bb00362b03516948e60c066f4">More...</a><br /></td></tr>
+<tr class="separator:a12080f8bb00362b03516948e60c066f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82cf58366a061f1ff2770e9933d53184"><td class="memItemLeft" align="right" valign="top">subroutine, public&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils__mod_8F90.html#a82cf58366a061f1ff2770e9933d53184">utils_mod::zero_out_phantom_ice</a> (fin, fout, icnt)</td></tr>
+<tr class="memdesc:a82cf58366a061f1ff2770e9933d53184"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ensure that when fin contains zeros for all ncat, fout will also contain zeros for all ncat.  <a href="utils__mod_8F90.html#a82cf58366a061f1ff2770e9933d53184">More...</a><br /></td></tr>
+<tr class="separator:a82cf58366a061f1ff2770e9933d53184"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Define utility procedures. </p>
@@ -222,7 +228,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00673">673</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00675">675</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -291,7 +297,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00545">545</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00547">547</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -367,7 +373,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00588">588</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00590">590</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -429,7 +435,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00632">632</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00634">634</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -498,7 +504,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00286">286</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00288">288</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -567,7 +573,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00331">331</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00333">333</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -671,7 +677,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00191">191</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00193">193</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -775,7 +781,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00241">241</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00243">243</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -815,7 +821,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00709">709</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00764">764</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -905,7 +911,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00065">65</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00067">67</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -995,7 +1001,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00127">127</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00129">129</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -1050,7 +1056,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00376">376</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00378">378</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -1112,7 +1118,7 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00431">431</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00433">433</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>
@@ -1181,7 +1187,101 @@ Functions/Subroutines</h2></td></tr>
 </dl>
 <dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00488">488</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00490">490</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+
+</div>
+</div>
+<a id="file_a12080f8bb00362b03516948e60c066f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a12080f8bb00362b03516948e60c066f4">&#9670;&nbsp;</a></span>zero_out_land_ice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public utils_mod::zero_out_land_ice </td>
+          <td>(</td>
+          <td class="paramtype">integer(kind=4), dimension(:), intent(in)&#160;</td>
+          <td class="paramname"><em>mask</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(kind=8), dimension(:,:), intent(inout)&#160;</td>
+          <td class="paramname"><em>fout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(out)&#160;</td>
+          <td class="paramname"><em>icnt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reset field values to zero on land. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">mask</td><td>the land mask </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">fout</td><td>the field value </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">icnt</td><td>the number spatial points reset</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00712">712</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
+
+</div>
+</div>
+<a id="file_a82cf58366a061f1ff2770e9933d53184"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#file_a82cf58366a061f1ff2770e9933d53184">&#9670;&nbsp;</a></span>zero_out_phantom_ice()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine, public utils_mod::zero_out_phantom_ice </td>
+          <td>(</td>
+          <td class="paramtype">real(kind=8), dimension(:,:), intent(in)&#160;</td>
+          <td class="paramname"><em>fin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(kind=8), dimension(:,:), intent(inout)&#160;</td>
+          <td class="paramname"><em>fout</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(out)&#160;</td>
+          <td class="paramname"><em>icnt</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ensure that when fin contains zeros for all ncat, fout will also contain zeros for all ncat. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">fin</td><td>the field to test against </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">fout</td><td>the field tested </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">icnt</td><td>the number spatial points reset</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section author"><dt>Author</dt><dd><a href="#" onclick="location.href='mai'+'lto:'+'Den'+'is'+'e.W'+'or'+'the'+'n@'+'noa'+'a.'+'gov'; return false;">Denis<span style="display: none;">.nosp@m.</span>e.Wo<span style="display: none;">.nosp@m.</span>rthen<span style="display: none;">.nosp@m.</span>@noa<span style="display: none;">.nosp@m.</span>a.gov</a> </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="utils__mod_8F90_source.html#l00739">739</a> of file <a class="el" href="utils__mod_8F90_source.html">utils_mod.F90</a>.</p>
 
 </div>
 </div>

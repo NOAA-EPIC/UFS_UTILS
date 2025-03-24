@@ -25,7 +25,7 @@ var NAVTREE =
 [
   [ "emcsfc_snow2mdl", "index.html", [
     [ "Introduction", "index.html#autotoc_md1", null ],
-    [ "README", "md__scratch1_NCEPDEV_da_George_8Gayno_ufs_utils_8git_UFS_UTILS_8upstream_sorc_emcsfc_snow2mdl_8fd_docs_README.html", null ],
+    [ "README", "md__scratch2_NAGAPE_epic_Gillian_8Petro_UFS_UTILS-epic_sorc_emcsfc_snow2mdl_8fd_docs_README.html", null ],
     [ "Modules", "namespaces.html", [
       [ "Modules List", "namespaces.html", "namespaces_dup" ],
       [ "Module Members", "namespacemembers.html", [

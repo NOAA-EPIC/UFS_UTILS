@@ -1,8 +1,8 @@
-.TH "/scratch1/NCEPDEV/da/George.Gayno/ufs_utils.git/UFS_UTILS.upstream/sorc/ocnice_prep.fd/utils_mod.F90" 3 "Tue Jan 21 2025" "Version 1.13.0" "ocnice_prep" \" -*- nroff -*-
+.TH "/scratch2/NAGAPE/epic/Gillian.Petro/UFS_UTILS-epic/sorc/ocnice_prep.fd/utils_mod.F90" 3 "Wed Mar 19 2025" "Version 1.13.0" "ocnice_prep" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-/scratch1/NCEPDEV/da/George.Gayno/ufs_utils.git/UFS_UTILS.upstream/sorc/ocnice_prep.fd/utils_mod.F90 \- Define utility procedures\&.  
+/scratch2/NAGAPE/epic/Gillian.Petro/UFS_UTILS-epic/sorc/ocnice_prep.fd/utils_mod.F90 \- Define utility procedures\&.  
 
 .SH SYNOPSIS
 .br
@@ -85,6 +85,14 @@
 .RI "subroutine \fButils_mod::remap3d\fP (fname, nk, nflds, src_field, dst_field)"
 .br
 .RI "Remap a field packed array of nk levels and nflds fields\&. "
+.ti -1c
+.RI "subroutine, public \fButils_mod::zero_out_land_ice\fP (mask, fout, icnt)"
+.br
+.RI "Reset field values to zero on land\&. "
+.ti -1c
+.RI "subroutine, public \fButils_mod::zero_out_phantom_ice\fP (fin, fout, icnt)"
+.br
+.RI "Ensure that when fin contains zeros for all ncat, fout will also contain zeros for all ncat\&. "
 .in -1c
 .SH "Detailed Description"
 .PP 
@@ -132,7 +140,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 673 of file utils_mod\&.F90\&.
+Definition at line 675 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::dumpnc2d (character(len=*), intent(in) fname, character(len=*), intent(in) vname, integer, dimension(:), intent(in) dims, integer, intent(in) nflds, real(kind=8), dimension(:,:), intent(in) field)\fC [private]\fP"
 
 .PP
@@ -158,7 +166,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 545 of file utils_mod\&.F90\&.
+Definition at line 547 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::dumpnc3d (character(len=*), intent(in) fname, character(len=*), intent(in) vname, integer, dimension(:), intent(in) dims, integer, intent(in) nk, integer, intent(in) nflds, real(kind=8), dimension(:,:,:), intent(in) field)\fC [private]\fP"
 
 .PP
@@ -186,7 +194,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 588 of file utils_mod\&.F90\&.
+Definition at line 590 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::dumpnc3dk (character(len=*), intent(in) fname, character(len=*), intent(in) vname, integer, dimension(:), intent(in) dims, real(kind=8), dimension(:,:), intent(in) field)\fC [private]\fP"
 
 .PP
@@ -210,7 +218,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 632 of file utils_mod\&.F90\&.
+Definition at line 634 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::getfield2d (character(len=*), intent(in) fname, character(len=*), intent(in) vname, integer, dimension(:), intent(in) dims, real(kind=8), dimension(:), intent(out) field, character(len=*), intent(in), optional wgts)\fC [private]\fP"
 
 .PP
@@ -236,7 +244,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 286 of file utils_mod\&.F90\&.
+Definition at line 288 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::getfield3d (character(len=*), intent(in) fname, character(len=*), intent(in) vname, integer, dimension(:), intent(in) dims, real(kind=8), dimension(:,:), intent(out) field, character(len=*), intent(in), optional wgts)\fC [private]\fP"
 
 .PP
@@ -262,7 +270,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 331 of file utils_mod\&.F90\&.
+Definition at line 333 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::getvecpair2d (character(len=*), intent(in) fname, character(len=*), intent(in) wdir, real(kind=8), dimension(:), intent(in) cosrot, real(kind=8), dimension(:), intent(in) sinrot, character(len=*), intent(in) vname1, character(len=*), intent(in) vgrid1, character(len=*), intent(in) vname2, character(len=*), intent(in) vgrid2, integer, dimension(:), intent(in) dims, real(kind=8), dimension(:,:), intent(out) vecpair)\fC [private]\fP"
 
 .PP
@@ -298,7 +306,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 191 of file utils_mod\&.F90\&.
+Definition at line 193 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::getvecpair3d (character(len=*), intent(in) fname, character(len=*), intent(in) wdir, real(kind=8), dimension(:), intent(in) cosrot, real(kind=8), dimension(:), intent(in) sinrot, character(len=*), intent(in) vname1, character(len=*), intent(in) vgrid1, character(len=*), intent(in) vname2, character(len=*), intent(in) vgrid2, integer, dimension(:), intent(in) dims, real(kind=8), dimension(:,:,:), intent(out) vecpair)\fC [private]\fP"
 
 .PP
@@ -334,7 +342,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 241 of file utils_mod\&.F90\&.
+Definition at line 243 of file utils_mod\&.F90\&.
 .SS "subroutine, public utils_mod::nf90_err (integer, intent(in) ierr, character(len=*), intent(in) string)"
 
 .PP
@@ -354,7 +362,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 709 of file utils_mod\&.F90\&.
+Definition at line 764 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::packarrays2d (character(len=*), intent(in) filesrc, character(len=*), intent(in) wgtsdir, real(kind=8), dimension(:), intent(in) cosrot, real(kind=8), dimension(:), intent(in) sinrot, type(\fBvardefs\fP), dimension(:), intent(in) vars, integer, dimension(:), intent(in) dims, integer, intent(in) nflds, real(kind=8), dimension(:,:), intent(out) fields)\fC [private]\fP"
 
 .PP
@@ -386,7 +394,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 65 of file utils_mod\&.F90\&.
+Definition at line 67 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::packarrays3d (character(len=*), intent(in) filesrc, character(len=*), intent(in) wgtsdir, real(kind=8), dimension(:), intent(in) cosrot, real(kind=8), dimension(:), intent(in) sinrot, type(\fBvardefs\fP), dimension(:), intent(in) vars, integer, dimension(:), intent(in) dims, integer, intent(in) nflds, real(kind=8), dimension(:,:,:), intent(out) fields)\fC [private]\fP"
 
 .PP
@@ -418,7 +426,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 127 of file utils_mod\&.F90\&.
+Definition at line 129 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::remap1d (character(len=*), intent(in) fname, real(kind=8), dimension(:), intent(in) src_field, real(kind=8), dimension(:), intent(out) dst_field)\fC [private]\fP"
 
 .PP
@@ -440,7 +448,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 376 of file utils_mod\&.F90\&.
+Definition at line 378 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::remap2d (character(len=*), intent(in) fname, integer, intent(in) dim2, real(kind=8), dimension(:,:), intent(in) src_field, real(kind=8), dimension(:,:), intent(out) dst_field)\fC [private]\fP"
 
 .PP
@@ -464,7 +472,7 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 431 of file utils_mod\&.F90\&.
+Definition at line 433 of file utils_mod\&.F90\&.
 .SS "subroutine utils_mod::remap3d (character(len=*), intent(in) fname, integer, intent(in) nk, integer, intent(in) nflds, real(kind=8), dimension(:,:,:), intent(in) src_field, real(kind=8), dimension(:,:,:), intent(out) dst_field)\fC [private]\fP"
 
 .PP
@@ -490,7 +498,51 @@ Denise.Worthen@noaa.gov
 .PP
 
 .PP
-Definition at line 488 of file utils_mod\&.F90\&.
+Definition at line 490 of file utils_mod\&.F90\&.
+.SS "subroutine, public utils_mod::zero_out_land_ice (integer(kind=4), dimension(:), intent(in) mask, real(kind=8), dimension(:,:), intent(inout) fout, integer, intent(out) icnt)"
+
+.PP
+Reset field values to zero on land\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fImask\fP the land mask 
+.br
+\fIfout\fP the field value 
+.br
+\fIicnt\fP the number spatial points reset
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Denise.Worthen@noaa.gov 
+.RE
+.PP
+
+.PP
+Definition at line 712 of file utils_mod\&.F90\&.
+.SS "subroutine, public utils_mod::zero_out_phantom_ice (real(kind=8), dimension(:,:), intent(in) fin, real(kind=8), dimension(:,:), intent(inout) fout, integer, intent(out) icnt)"
+
+.PP
+Ensure that when fin contains zeros for all ncat, fout will also contain zeros for all ncat\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIfin\fP the field to test against 
+.br
+\fIfout\fP the field tested 
+.br
+\fIicnt\fP the number spatial points reset
+.RE
+.PP
+\fBAuthor:\fP
+.RS 4
+Denise.Worthen@noaa.gov 
+.RE
+.PP
+
+.PP
+Definition at line 739 of file utils_mod\&.F90\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for ocnice_prep from the source code\&.
