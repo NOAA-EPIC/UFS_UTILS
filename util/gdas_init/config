@@ -56,6 +56,7 @@ basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/I
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/2023022112.C384C192L127
 basedir=/scratch2/BMC/wrfruc/Samuel.Trahan/westwater/sijie-inf/ning-grid-stuff/ICs/AR2023022400
 basedir=/scratch1/NCEPDEV/nems/David.Burrows/ufs-utils-tiled/ICs/2023022118.C384C192L127_myStagedFixed
+basedir=/gpfs/f6/bil-fire8/scratch/David.Burrows/ufs_utils_work/apr11/ICs/2023022118.C384C192L127
 
 EXTRACT_DIR=$basedir/input
 EXTRACT_DATA=yes
@@ -71,7 +72,7 @@ use_v16retro=no
 
 LEVS=128
 
-CDUMP=gdas
+CDUMP=gfs
 
 CRES_HIRES=C384
 CRES_ENKF=C192

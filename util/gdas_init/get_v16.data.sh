@@ -1,4 +1,5 @@
 #!/bin/bash
+hostname
 
 #----------------------------------------------------------------------
 # Retrieve gfs v16 data.  v16 was officially implemented on 12 UTC

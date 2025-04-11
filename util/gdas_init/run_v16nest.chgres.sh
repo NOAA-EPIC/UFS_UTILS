@@ -17,6 +17,7 @@ FIX_ORO=${FIX_FV3}/orog
 FIX_ORO=/scratch1/BMC/gsd-fv3-dev/NCEPDEV/stmp3/Ning.Wang/nest3
 FIX_ORO=/scratch1/NCEPDEV/global/glopara/fix/orog/global-nest.20240419
 FIX_ORO=/scratch1/NCEPDEV/nems/David.Burrows/ufs-utils-tiled/ufs_utils_tile_dev_v3/driver_scripts/fv3_grid/nest-384/out
+FIX_ORO=/gpfs/f6/bil-fire8/scratch/David.Burrows/ufs_utils_work/apr11/ufs_utils_tile_dev/driver_scripts/fv3_grid/nest-384/out
 FIX_AM=${FIX_FV3}/am
 
 THOMPSON_AEROSOL_FILE=${FIX_AM}/Thompson_MP_MONTHLY_CLIMO.nc
