@@ -667,8 +667,8 @@
  jpdt    = -9999  ! Array of values in product definition template, set to wildcard.
  unpack  = .false. ! unpack data
    
- call getgb2(lugb, lugi, j, jdisc, jids, jpdtn, jpdt, jgdtn, jgdt, &
-             unpack, k, gfld, rc)
+ call getgb2i2(lugb, lugi, j, jdisc, jids, jpdtn, jpdt, jgdtn, jgdt, &
+             unpack, 2, k, gfld, rc)
  if (rc /= 0) call error_handler("DEGRIBBING INPUT FILE.", rc)
 
  call baclose(lugb,rc)
